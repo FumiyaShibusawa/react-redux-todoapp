@@ -1,11 +1,6 @@
 import * as React from "react"
 
-interface TodoListProps {
-  todolist_name: string,
-  status: string
-}
-
-class TodoList extends React.Component<TodoListProps, {}> {
+class TodoList extends React.Component {
   render(){
     return (
       <div className="todolist_component">
