@@ -1,11 +1,6 @@
 import * as React from "react"
 
-interface TodoProps {
-  todo_name: string,
-  status: string
-}
-
-class Todo extends React.Component<TodoProps, {}> {
+class Todo extends React.Component {
   render(){
     return (
       <div className="todo_component">

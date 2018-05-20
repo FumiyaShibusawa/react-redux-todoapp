@@ -1,0 +1,76 @@
+// Place all the styles related to the TodoList controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// variables
+$base-color: #294E80;
+main, footer, section, aside, article {
+  padding: 30px;
+  box-sizing: border-box;
+  h1, h2, h3, h4, h5 {
+    margin: 0 0 30px;
+  }
+  p {
+    margin: 0 0 20px;
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+header {
+  background-color: $base-color;
+  color: #fff;
+  padding: 15px 30px;
+  box-shadow: 0 1px 7px rgba(0,0,0,0.5);
+  position: sticky;
+  nav {
+    text-align: right;
+    position: relative;
+    .logo {
+      position: absolute;
+      left: 0;
+      i {
+        font-size: 1.5rem;
+      }
+    }
+    ul {
+      display: inline-block;
+      line-height: 1.5rem;
+    }
+  }
+}
+.wrapper {
+  padding: 0 30px;
+  background-color: #fafafa;
+  #todolist-root {
+    max-width: 950px;
+    margin: auto;
+    height: 100%;
+    .todolist_container {
+      display: -ms-flexbox;
+      display: -webkit-box;
+      display: flex;
+      height: 100%;
+      .todolist_component {
+        flex-basis: 200px;
+        padding: 30px;
+        box-sizing: border-box;
+      }
+      .todo_component {
+        flex-basis: 750px;
+        padding: 30px;
+        box-sizing: border-box;
+        background-color: #ffffff;
+        border-left: 1px solid #f1f1f1;
+        border-right: 1px solid #f1f1f1;
+      }
+    }
+  }
+}

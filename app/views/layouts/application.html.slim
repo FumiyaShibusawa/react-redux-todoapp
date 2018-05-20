@@ -1,0 +1,11 @@
+- content_for :header do
+  = render partial: "layouts/navigation"
+
+- content_for :main do
+  = yield
+
+- content_for :footer do
+  - if request.path_info != root_path
+    = link_to "トップへ戻る", root_path
+
+= render :partial => "layouts/base"
