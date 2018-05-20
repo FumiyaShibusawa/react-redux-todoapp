@@ -8,11 +8,16 @@ services:
       - .:/react-redux-todoapp:cached
       - bundle:/usr/local/bundle
     ports:
-      - "${EXTERNAL_RAILS_PORT:-5055}:5055"
+      - "${EXTERNAL_RAILS_PORT:-5056}:5056"
     depends_on:
       - mongo
       - kvs
     tty: true
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.10
+    extra_hosts:
+      - react-redux-todoapp.local:172.16.238.10
 
   mongo:
     build:
@@ -21,15 +26,23 @@ services:
     volumes:
       - data_mongo:/data/db
     ports:
-      - "${EXTERNAL_MONGO_PORT:-27019}:27019"
+      - "${EXTERNAL_MONGO_PORT:-27020}:27020"
 
   kvs:
     build:
       context: .
       dockerfile: ./containers/kvs/Dockerfile
     ports:
-      - "${EXTERNAL_REDIS_PORT:-6376}:6376"
+      - "${EXTERNAL_REDIS_PORT:-6375}:6375"
 
 volumes:
   data_mongo:
   bundle:
+
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
