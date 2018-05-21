@@ -1,9 +1,9 @@
 import * as React from "react"
 
 class Todo extends React.Component {
-  toggleTodoForm = () => {
-    $("#todo_form").toggle();
-  }
+  // toggleTodoForm = () => {
+  //   $("#todo_form").toggle();
+  // }
   render(){
     return (
       <div className="todo_component">
@@ -16,7 +16,7 @@ class Todo extends React.Component {
             </li>
           ))}
         </ul>
-        <div onClick={ this.toggleTodoForm } >
+        <div onClick={ this.props.toggleTodoForm } >
           <i className="fa fa-plus"></i>
           <span>Todoを追加する</span>
         </div>
@@ -28,15 +28,15 @@ class Todo extends React.Component {
   }
 }
 
-Todo.defaultProps = {
-  todo_list: {
-    name: "TodoList1だよ",
-    todos: [
-      { status: "open", name: "Todo1だよ" },
-      { status: "open", name: "Todo2だよ" },
-      { status: "done", name: "Todo3だよ" }
-    ]
-  }
-}
+// Todo.defaultProps = {
+//   todo_list: {
+//     name: "TodoList1だよ",
+//     todos: [
+//       { status: "open", name: "Todo1だよ" },
+//       { status: "open", name: "Todo2だよ" },
+//       { status: "done", name: "Todo3だよ" }
+//     ]
+//   }
+// }
 
 export default Todo

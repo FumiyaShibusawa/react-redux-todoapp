@@ -1,15 +1,12 @@
 import * as React from "react"
-import { render } from "react-dom"
-import Todo from "../components/Todo"
-import TodoList from "../components/TodoList"
+import TodoContainer from "../containers/TodoContainer"
+import TodoListContainer from "../containers/TodoListContainer"
 
-const todolist_root = document.getElementById("todolist-root");
-if (todolist_root) {
-  render(
-    <div className="todolist_container">
-      <TodoList />
-      <Todo />
-    </div>,
-    todolist_root
-  )
-};
+const App = () => (
+  <div className="todolist_container">
+    <TodoContainer />
+    <TodoListContainer />
+  </div>
+)
+
+export default App
