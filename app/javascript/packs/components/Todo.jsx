@@ -1,9 +1,6 @@
 import * as React from "react"
 
 class Todo extends React.Component {
-  // toggleTodoForm = () => {
-  //   $("#todo_form").toggle();
-  // }
   render(){
     return (
       <div className="todo_component">
@@ -22,21 +19,11 @@ class Todo extends React.Component {
         </div>
         <div id="todo_form" style={{ display: 'none' }}>
           <input type="text"/>
+          <input type="submit" value="送信"/>
         </div>
       </div>
     )
   }
 }
-
-// Todo.defaultProps = {
-//   todo_list: {
-//     name: "TodoList1だよ",
-//     todos: [
-//       { status: "open", name: "Todo1だよ" },
-//       { status: "open", name: "Todo2だよ" },
-//       { status: "done", name: "Todo3だよ" }
-//     ]
-//   }
-// }
 
 export default Todo
