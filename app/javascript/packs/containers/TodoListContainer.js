@@ -16,6 +16,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   toggleTodoListForm: () => {
     $("#todo_list_form").toggle();
+  },
+  addNewTodoList: (e) => {
+    console.log(e);
   }
 })
 

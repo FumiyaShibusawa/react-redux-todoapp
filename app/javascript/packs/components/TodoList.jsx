@@ -15,7 +15,7 @@ class TodoList extends React.Component {
         </div>
         <div id="todo_list_form" style={{ display: 'none' }}>
           <input type="text"/>
-          <input type="submit" value="送信"/>
+          <input type="submit" value="送信" onClick={ this.props.addNewTodoList }/>
         </div>
       </div>
     )
