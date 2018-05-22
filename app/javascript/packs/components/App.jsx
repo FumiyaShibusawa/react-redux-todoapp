@@ -4,8 +4,8 @@ import TodoListContainer from "../containers/TodoListContainer"
 
 const App = () => (
   <div className="todolist_container">
-    <TodoContainer />
     <TodoListContainer />
+    <TodoContainer />
   </div>
 )
 
