@@ -1,4 +1,4 @@
-const todos = (state = "", action) => {
+const todos = (state = null, action) => {
   switch (action.type) {
     default:
       return state

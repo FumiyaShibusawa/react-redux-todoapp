@@ -1,4 +1,4 @@
-const todolists = (state = "", action) => {
+const todolists = (state = null, action) => {
   switch (action.type) {
     default:
       return state
