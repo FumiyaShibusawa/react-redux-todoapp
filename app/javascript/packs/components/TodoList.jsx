@@ -2,6 +2,7 @@ import * as React from "react"
 
 class TodoList extends React.Component {
   render(){
+    let input;
     return (
       <div className="todolist_component">
         <ul>
@@ -14,21 +15,18 @@ class TodoList extends React.Component {
           <span>Todoリストを追加する</span>
         </div>
         <div id="todo_list_form" style={{ display: 'none' }}>
-          <input type="text"/>
-          <input type="submit" value="送信" onClick={ this.props.addNewTodoList }/>
+          <input type="text" ref= { node => { input = node }}/>
+          <input type="submit" value="送信" onClick={ () => {
+            if (input) {
+              this.props.addNewTodoList(input.value);
+              input.value = ""; // テキストボックス内の値をクリア
+            }
+          }
+          }/>
         </div>
       </div>
     )
   }
-}
-
-TodoList.defaultProps = {
-  todo_lists: [
-    {name: "TodoList1だよ"},
-    {name: "TodoList2だよ"},
-    {name: "TodoList3だよ"},
-    {name: "TodoList4だよ"},
-  ]
 }
 
 export default TodoList
