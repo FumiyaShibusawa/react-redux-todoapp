@@ -8,9 +8,6 @@ import { addTodoList } from "../actions/TodoListActions"
 
 
 const store = createStore(rootReducer)
-const listen = store.subscribe(() =>
-  console.log(store.getState())
-)
 const todolist_root = document.getElementById("todolist-root")
 if (todolist_root) {
   render(
