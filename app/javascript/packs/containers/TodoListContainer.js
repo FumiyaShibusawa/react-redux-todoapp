@@ -3,15 +3,15 @@ import TodoList from "../components/TodoList"
 import { addTodoList } from "../actions/TodoListActions"
 
 const mapStateToProps = state => ({
-  todo_lists: state.todo_lists
+  todo_lists: state.todolists.todo_lists
 })
 
 const mapDispatchToProps = dispatch => ({
   toggleTodoListForm: () => {
     $("#todo_list_form").toggle();
   },
-  addNewTodoList: () => {
-    dispatch(addTodoList("hogeeee"))
+  addNewTodoList: (text) => {
+    dispatch(addTodoList(text));
   }
 })
 
