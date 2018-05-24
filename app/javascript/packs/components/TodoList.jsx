@@ -22,4 +22,13 @@ class TodoList extends React.Component {
   }
 }
 
+TodoList.defaultProps = {
+  todo_lists: [
+    {name: "TodoList1だよ"},
+    {name: "TodoList2だよ"},
+    {name: "TodoList3だよ"},
+    {name: "TodoList4だよ"},
+  ]
+}
+
 export default TodoList

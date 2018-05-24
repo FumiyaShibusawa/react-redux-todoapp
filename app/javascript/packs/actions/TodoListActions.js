@@ -1,3 +1,4 @@
-export const addTodoList = () => ({
-  type: "ADD_TODOLIST"
+export const addTodoList = (text) => ({
+  type: "ADD_TODOLIST",
+  text: text
 })
