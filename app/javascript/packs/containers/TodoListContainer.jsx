@@ -6,7 +6,7 @@ import { addTodoList } from "../actions/TodoListActions"
 import { addTodo, showTodos } from "../actions/TodoActions"
 
 const mapStateToProps = state => ({
-  todo_lists: state.todolists.todo_lists,
+  todo_lists: state.todolists.todo_lists
 })
 
 const mapDispatchToProps = dispatch => ({
