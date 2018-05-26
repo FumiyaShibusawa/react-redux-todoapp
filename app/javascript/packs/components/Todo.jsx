@@ -18,23 +18,23 @@ class Todo extends React.Component {
                     </li>
                   )) }
                 </ul>
+                <div onClick={ this.props.toggleTodoForm } >
+                  <i className="fa fa-plus"></i>
+                  <span>Todoを追加する</span>
+                </div>
+                <div id="todo_form" style={{ display: 'none' }}>
+                  <input type="text" ref= { node => { input = node } }/>
+                  <input type="submit" value="送信" onClick={ () => {
+                    if (input) {
+                      this.props.addNewTodo(input.value, this.props.num);
+                      input.value = ""; // テキストボックス内の値をクリア
+                    }
+                  } }/>
+                </div>
               </div>
             )
           }
         })() }
-        <div onClick={ this.props.toggleTodoForm } >
-          <i className="fa fa-plus"></i>
-          <span>Todoを追加する</span>
-        </div>
-        <div id="todo_form" style={{ display: 'none' }}>
-          <input type="text" ref= { node => { input = node } }/>
-          <input type="submit" value="送信" onClick={ () => {
-            if (input) {
-              this.props.addNewTodo(input.value, this.props.num);
-              input.value = ""; // テキストボックス内の値をクリア
-            }
-          } }/>
-        </div>
       </div>
     )
   }
