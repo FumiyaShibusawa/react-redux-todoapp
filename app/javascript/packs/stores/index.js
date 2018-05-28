@@ -8,7 +8,7 @@ import App from "../components/App"
 import { addTodoList } from "../actions/TodoListActions"
 
 
-const store = createStore(rootReducer,applyMiddleware(thunkMiddleware))
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 const todolist_root = document.getElementById("todolist-root")
 if (todolist_root) {
   render(
