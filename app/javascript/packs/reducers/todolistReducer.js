@@ -14,6 +14,8 @@ const todolists = (state = { todo_lists: [] }, action) => {
       return { todo_lists: [
         ...state.todo_lists
       ] }
+    case "ADD_TODOLIST_FAILED":
+      return state
     default:
       return state
   }
