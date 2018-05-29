@@ -19,11 +19,11 @@ const mapDispatchToProps = dispatch => ({
   fetchTodoLists: () => {
     dispatch(fetchTodoLists());
   },
-  addNewTodoList: (todo_list) => {
+  addTodoList: (todo_list) => {
     dispatch(addTodoList(todo_list));
   },
-  deleteTodoList: (todo_list, index) => {
-    dispatch(deleteTodoList(todo_list, index));
+  deleteTodoList: (todo_list) => {
+    dispatch(deleteTodoList(todo_list));
   },
   addNewTodo: (todo, index) => {
     dispatch(addTodo(todo, index));
@@ -52,7 +52,7 @@ class TodoListContainer extends React.Component {
         <TodoList
         todo_lists={ this.props.todo_lists }
         toggleTodoListForm={ this.props.toggleTodoListForm }
-        addNewTodoList={ this.props.addNewTodoList }
+        addTodoList={ this.props.addTodoList }
         showTodos={ this.showTodos }
         deleteTodoList={ this.props.deleteTodoList }
         />
