@@ -12,9 +12,12 @@ class TodoList extends React.Component {
               onClick={ () => { this.props.showTodos(i) } }
               >{ todo_list.name }
               <span
+              className="delete"
               key={ `${todo_list.name}_${todo_list._id["$oid"]}` }
-              onClick={ () => { this.props.deleteTodoList(todo_list) } }
-              >×</span>
+              onClick={ (e) => {
+                e.stopPropagation();
+                this.props.deleteTodoList(todo_list);
+              } }>×</span>
               </li>
             ) ) }
         </ul>
@@ -26,7 +29,7 @@ class TodoList extends React.Component {
           <input type="text" ref= { node => { input = node } }/>
           <input type="submit" value="送信" onClick={ () => {
             if (input) {
-              this.props.addNewTodoList(input.value);
+              this.props.addTodoList(input.value);
               input.value = ""; // テキストボックス内の値をクリア
             }
           } }/>
