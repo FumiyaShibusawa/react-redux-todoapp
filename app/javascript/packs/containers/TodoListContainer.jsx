@@ -2,7 +2,7 @@ import * as React from "react"
 import { connect } from "react-redux"
 import TodoList from "../components/TodoList"
 import Todo from "../components/Todo"
-import { addTodoList } from "../actions/TodoListActions"
+import { addTodoList, fetchTodoLists, deleteTodoList } from "../actions/TodoListActions"
 import { addTodo, showTodos } from "../actions/TodoActions"
 
 const mapStateToProps = state => ({
@@ -16,8 +16,14 @@ const mapDispatchToProps = dispatch => ({
   toggleTodoForm: () => {
     $("#todo_form").toggle();
   },
+  fetchTodoLists: () => {
+    dispatch(fetchTodoLists());
+  },
   addNewTodoList: (todo_list) => {
     dispatch(addTodoList(todo_list));
+  },
+  deleteTodoList: (todo_list, index) => {
+    dispatch(deleteTodoList(todo_list, index));
   },
   addNewTodo: (todo, index) => {
     dispatch(addTodo(todo, index));
@@ -34,6 +40,9 @@ class TodoListContainer extends React.Component {
       todo_list_idx: 0
     };
   }
+  componentDidMount = () => {
+    this.props.fetchTodoLists()
+  }
   showTodos = (index) => {
     this.setState({ todo_list_idx: index })
   }
@@ -45,6 +54,7 @@ class TodoListContainer extends React.Component {
         toggleTodoListForm={ this.props.toggleTodoListForm }
         addNewTodoList={ this.props.addNewTodoList }
         showTodos={ this.showTodos }
+        deleteTodoList={ this.props.deleteTodoList }
         />
         <Todo
         todo_list={ this.props.todo_lists[this.state.todo_list_idx] }

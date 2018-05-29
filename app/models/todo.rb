@@ -1,8 +1,8 @@
-class TodoList
+class Todo
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  has_many :todos
+  belongs_to :todo_list
 
   field :name, type: String
 end

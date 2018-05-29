@@ -8,9 +8,14 @@ class TodoList extends React.Component {
         <ul>
             { this.props.todo_lists.map( (todo_list, i) => (
               <li
-              key={ `${todo_list.name}_${i}` }
+              key={ `${todo_list.name}_${todo_list._id["$oid"]}` }
               onClick={ () => { this.props.showTodos(i) } }
-              >{ todo_list.name }</li>
+              >{ todo_list.name }
+              <span
+              key={ `${todo_list.name}_${todo_list._id["$oid"]}` }
+              onClick={ () => { this.props.deleteTodoList(todo_list) } }
+              >×</span>
+              </li>
             ) ) }
         </ul>
         <div onClick={ this.props.toggleTodoListForm }>

@@ -11,12 +11,16 @@ class Todo extends React.Component {
               <div>
                 <h2>{ this.props.todo_list.name }</h2>
                 <ul>
-                  { this.props.todo_list.todos.map( (todo, i) => (
-                    <li key={ `${todo.name}_${i}` }>
-                    <span>{ todo.status }</span>
-                    <span>{ todo.name }</span>
-                    </li>
-                  )) }
+                  { (() => {
+                    if (this.props.todo_list.todos) {
+                      this.props.todo_list.todos.map( (todo, i) => (
+                        <li key={ `${todo.name}_${i}` }>
+                        <span>{ todo.status }</span>
+                        <span>{ todo.name }</span>
+                        </li>
+                      ))
+                    }
+                  })() }
                 </ul>
                 <div onClick={ this.props.toggleTodoForm } >
                   <i className="fa fa-plus"></i>
