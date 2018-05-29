@@ -10,7 +10,7 @@ class TodoListsController < ApplicationController
   def create
     todo_list = TodoList.new(todo_list_params)
     if todo_list.save
-      todo_list_data = JSON.parse(todo_list.to_json)
+      todo_list_data = JSON.parse(TodoList.all.to_json(include: :todos))
       respond_to do |format|
         format.html
         format.json { render json: todo_list_data }
@@ -21,7 +21,7 @@ class TodoListsController < ApplicationController
   def destroy
     todo_list = TodoList.find(params[:id])
     if todo_list.destroy
-      todo_list_data = JSON.parse TodoList.all.to_json(include: :todos)
+      todo_list_data = JSON.parse(TodoList.all.to_json(include: :todos))
       respond_to do |format|
         format.html
         format.json { render json: todo_list_data }
