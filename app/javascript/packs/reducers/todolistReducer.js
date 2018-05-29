@@ -8,10 +8,9 @@ const todolists = (state = { todo_lists: [] }, action) => {
       return state
 
     case "ADD_TODOLIST":
-      return { todo_lists: [
-        ...state.todo_lists,
-        { name: action.todo_list, todos: [] }
-      ] }
+      return { todo_lists:
+        action.todo_lists
+      }
     case "ADD_TODOLIST_FAILED":
       return state
 
