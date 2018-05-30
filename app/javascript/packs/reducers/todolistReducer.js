@@ -1,16 +1,12 @@
-const todolists = (state = { todo_lists: [] }, action) => {
+const todolists = (state = [], action) => {
   switch (action.type) {
     case "FETCH_TODOLISTS":
-      return { todo_lists:
-        action.todo_lists
-      }
+      return action.todo_lists
     case "FETCH_TODOLISTS_FAILED":
       return state
 
     case "ADD_TODOLIST":
-      return { todo_lists:
-        action.todo_lists
-      }
+      return action.todo_lists
     case "ADD_TODOLIST_FAILED":
       return state
 
@@ -22,14 +18,17 @@ const todolists = (state = { todo_lists: [] }, action) => {
       return state
 
     case "ADD_TODO":
-      for (let i = 0; i < state.todo_lists.length; i++) {
-        if (i === action.index) {
-          state.todo_lists[i].todos.push({ name: action.todo, status: "open" })
-        }
-      }
-      return { todo_lists: [
-        ...state.todo_lists
-      ] }
+      // TODO: TodoListモデルをまるまる取得し直すのは燃費が悪い。
+      // 一部だけ変更して新しいstateとして返却したいけどやり方がわからない。
+      return action.todo
+    case "ADD_TODO_FAILED":
+      return state
+
+    case "DELETE_TODO":
+      return action.todo
+    case "DELETE_TODO_FAILED":
+      return state
+
     default:
       return state
   }
