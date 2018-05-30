@@ -13,10 +13,16 @@ class Todo extends React.Component {
                 <ul>
                   { (() => {
                     if (this.props.todo_list.todos) {
-                      this.props.todo_list.todos.map( (todo, i) => (
+                      return this.props.todo_list.todos.map( (todo, i) => (
                         <li key={ `${todo.name}_${i}` }>
-                        <span>{ todo.status }</span>
-                        <span>{ todo.name }</span>
+                          <span>{ todo.name }</span>
+                          <span
+                          className="delete"
+                          key={ `${todo.name}_${todo._id["$oid"]}` }
+                          onClick={ (e) => {
+                            e.stopPropagation();
+                            this.props.deleteTodo(todo);
+                          } }>×</span>
                         </li>
                       ))
                     }
@@ -30,7 +36,7 @@ class Todo extends React.Component {
                   <input type="text" ref= { node => { input = node } }/>
                   <input type="submit" value="送信" onClick={ () => {
                     if (input) {
-                      this.props.addNewTodo(input.value, this.props.num);
+                      this.props.addTodo(input.value, this.props.todo_list._id["$oid"], this.props.num);
                       input.value = ""; // テキストボックス内の値をクリア
                     }
                   } }/>
