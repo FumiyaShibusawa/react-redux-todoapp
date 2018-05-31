@@ -3,21 +3,17 @@ export const fetchTodoLists = () => {
     fetch("/todo_lists.json")
     .then(response => response.json())
     .then(
-      result => {
-        return dispatch(fetchTodoListsSuccess(result));
-      },
-      error => {
-        return dispatch(fetchTodoListsFailed(error));
-      }
+      result => (dispatch(fetchTodoListsSuccess(result))),
+      error => (dispatch(fetchTodoListsFailed(error)))
     )
   }
 }
 
-export const fetchTodoListsSuccess = (todo_lists) => ({
+const fetchTodoListsSuccess = (todo_lists) => ({
   type: "FETCH_TODOLISTS",
   todo_lists: todo_lists
 })
-export const fetchTodoListsFailed = (error) => ({
+const fetchTodoListsFailed = (error) => ({
   type: "FETCH_TODOLISTS_FAILED",
   error: error
 })
@@ -35,21 +31,17 @@ export const addTodoList = (todo_list) => {
     })
     .then(response => response.json())
     .then(
-      result => {
-        return dispatch(addTodoListSuccess(result));
-      },
-      error => {
-        return dispatch(addTodoListFailed(error));
-      }
+      result => (dispatch(addTodoListSuccess(result))),
+      error => (dispatch(addTodoListFailed(error)))
     )
   }
 }
 
-export const addTodoListSuccess = (todo_lists) => ({
+const addTodoListSuccess = (todo_lists) => ({
   type: "ADD_TODOLIST",
   todo_lists: todo_lists
 })
-export const addTodoListFailed = (todo_lists) => ({
+const addTodoListFailed = (todo_lists) => ({
   type: "ADD_TODOLIST_FAILED",
   todo_lists: todo_lists
 })
@@ -65,21 +57,17 @@ export const deleteTodoList = (todo_list) => {
     })
     .then(response => response.json())
     .then(
-      result => {
-        return dispatch(deleteTodoListSuccess(result));
-      },
-      error => {
-        return dispatch(deleteTodoListFailed(error));
-      }
+      result => (dispatch(deleteTodoListSuccess(result))),
+      error => (dispatch(deleteTodoListFailed(error)))
     )
   }
 }
 
-export const deleteTodoListSuccess = (todo_lists) => ({
+const deleteTodoListSuccess = (todo_lists) => ({
   type: "DELETE_TODOLIST",
   todo_lists: todo_lists
 })
-export const deleteTodoListFailed = (todo_lists) => ({
+const deleteTodoListFailed = (todo_lists) => ({
   type: "DELETE_TODOLIST_FAILED",
   todo_lists: todo_lists
 })

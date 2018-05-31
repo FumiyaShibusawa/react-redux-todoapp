@@ -58,18 +58,18 @@ header {
       display: -webkit-box;
       display: flex;
       height: 100%;
+      li {
+        position: relative;
+        .delete {
+          position: absolute;
+          right: 10px;
+          cursor: pointer;
+        }
+      }
       .todolist_component {
         flex-basis: 270px;
         padding: 30px;
         box-sizing: border-box;
-        li {
-          position: relative;
-          .delete {
-            position: absolute;
-            right: 10px;
-            cursor: pointer;
-          }
-        }
       }
       .todo_component {
         flex-basis: 680px;
