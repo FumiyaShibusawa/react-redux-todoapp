@@ -11,9 +11,7 @@ const todolists = (state = [], action) => {
       return state
 
     case "DELETE_TODOLIST":
-      return { todo_lists:
-        action.todo_lists
-      }
+      return action.todo_lists
     case "DELETE_TODOLIST_FAILED":
       return state
 
