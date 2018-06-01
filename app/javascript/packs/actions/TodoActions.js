@@ -60,3 +60,29 @@ const deleteTodoFailed = (todo) => ({
   type: "DELETE_TODO_FAILED",
   todo: todo
 })
+
+export const completeTodo = (todo) => {
+  return dispatch => {
+    fetch(`/todos/${todo._id["$oid"]}.json`, {
+      method: "PATCH",
+      body: JSON.stringify({ todo: { completed: !todo.completed } }),
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    })
+    .then(response => response.json())
+    .then(
+      result => (dispatch(completeTodoSuccess(result))),
+      error => (dispatch(completeTodoFailed(error)))
+    )
+  }
+}
+
+const completeTodoSuccess = (todo) => ({
+  type: "COMPLETE_TODO",
+  todo: todo
+})
+const completeTodoFailed = (todo) => ({
+  type: "COMPLETE_TODO_FAILED",
+  todo: todo
+})
