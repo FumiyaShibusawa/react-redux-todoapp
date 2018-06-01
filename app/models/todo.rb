@@ -5,4 +5,5 @@ class Todo
   belongs_to :todo_list
 
   field :name, type: String
+  field :completed, type: Boolean, default: false
 end

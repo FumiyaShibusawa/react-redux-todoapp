@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import TodoList from "../components/TodoList"
 import Todo from "../components/Todo"
 import { addTodoList, fetchTodoLists, deleteTodoList } from "../actions/TodoListActions"
-import { addTodo, showTodos, deleteTodo } from "../actions/TodoActions"
+import { addTodo, showTodos, deleteTodo, completeTodo } from "../actions/TodoActions"
 
 const mapStateToProps = state => ({
   todo_lists: state.todolists
@@ -30,6 +30,9 @@ const mapDispatchToProps = dispatch => ({
   },
   deleteTodo: (todo) => {
     dispatch(deleteTodo(todo));
+  },
+  completeTodo: (todo) => {
+    dispatch(completeTodo(todo));
   },
   showTodos: (todo_list) => {
     dispatch(showTodos(todo_list));
@@ -64,6 +67,7 @@ class TodoListContainer extends React.Component {
         toggleTodoForm={ this.props.toggleTodoForm }
         addTodo={ this.props.addTodo }
         deleteTodo={ this.props.deleteTodo }
+        completeTodo={ this.props.completeTodo }
         num={ this.state.todo_list_idx }
         />
       </div>

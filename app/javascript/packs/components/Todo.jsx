@@ -10,11 +10,18 @@ class Todo extends React.Component {
             return(
               <div>
                 <h2>{ this.props.todo_list.name }</h2>
-                <ul>
+                <ul className="todos">
                   { (() => {
                     if (this.props.todo_list.todos) {
                       return this.props.todo_list.todos.map( (todo, i) => (
                         <li key={ `${todo.name}_${i}` }>
+                          <span
+                          className={`completed ${todo.completed}`}
+                          onClick={ (e) => {
+                            e.stopPropagation();
+                            this.props.completeTodo(todo);
+                          } }
+                          ></span>
                           <span>{ todo.name }</span>
                           <span
                           className="delete"
