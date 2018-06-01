@@ -4,6 +4,8 @@
 
 // variables
 $base-color: #294E80;
+$utility-color: #eaeaea;
+$completed-color: #79b17a;
 main, footer, section, aside, article {
   padding: 30px;
   box-sizing: border-box;
@@ -64,6 +66,7 @@ header {
           position: absolute;
           right: 10px;
           cursor: pointer;
+          color: $utility-color;
         }
       }
       .todolist_component {
@@ -78,6 +81,44 @@ header {
         background-color: #ffffff;
         border-left: 1px solid #f1f1f1;
         border-right: 1px solid #f1f1f1;
+        .todos {
+          margin-bottom: 30px;
+          li {
+            line-height: 30px;
+            padding: 10px 0;
+            border-bottom: 1px solid $utility-color;
+            &:first-child {
+              border-top: 1px solid $utility-color;
+            }
+            .completed {
+              display: inline-block;
+              width: 20px;
+              height: 20px;
+              border: 1px solid $utility-color;
+              border-radius: 50%;
+              vertical-align: middle;
+              margin-right: 10px;
+              cursor: pointer;
+              position: relative;
+              transition: all .2s ease-in-out;
+              &.true {
+                background-color: lighten($completed-color, 30%);
+                border-color: lighten($completed-color, 20%);
+                &::before {
+                  content: "\f00c";
+                  font-family: FontAwesome;
+                  color: $completed-color;
+                  position: absolute;
+                  font-size: 13px;
+                  line-height: initial;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
