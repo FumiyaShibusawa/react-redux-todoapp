@@ -10,7 +10,7 @@ const Buttons = () => (
 
 const Navigation = () => (
   <Router>
-    <header>
+    <header className={ localStorage.getItem("jwt") ? "" : "non-auth" }>
       <div className="inner">
         <nav>
           <div className="logo">

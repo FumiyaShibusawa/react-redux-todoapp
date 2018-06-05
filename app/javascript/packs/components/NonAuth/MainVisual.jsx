@@ -14,6 +14,7 @@ const MainVisual = () => (
     </div>
     <div className="features">
       <div className="inner">
+        <h2>This sample is built with...</h2>
         <div className="features-grid">
           <section>
             <h3>React</h3>
@@ -32,6 +33,14 @@ const MainVisual = () => (
           </section>
         </div>
       </div>
+    </div>
+    <div className="contribute">
+      <section>
+        <h2>Give a PR to improve this sample!</h2>
+        <a href="https://github.com/FumiyaShibusawa/react-redux-todoapp" target="_blank">
+          https://github.com/FumiyaShibusawa/react-redux-todoapp
+        </a>
+      </section>
     </div>
   </div>
 )
