@@ -10,10 +10,5 @@ html lang="ja"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = yield :head
   body
-    header
-      = yield :header
-    main.wrapper
-      = yield :main
-    footer
-      = yield :footer
+    #todolist-root
     = yield :bottom_script
