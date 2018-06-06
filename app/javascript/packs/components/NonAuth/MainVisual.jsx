@@ -1,8 +1,12 @@
 import * as React from "react"
 import Signup from "./Signup"
+import Login from "./Login"
 
 const MainVisual = () => (
   <div>
+    <div className="modal">
+      <Login/>
+    </div>
     <div className="main-visual">
       <div className="inner">
         <div className="message">
