@@ -30,7 +30,7 @@ class Signup extends React.Component {
             />
             <button type="submit">Register</button>
           </form>
-          <Link className="goto-login" to="/login">Already have your account?</Link>
+          <div className="goto-login" data-modal="popup">Already have your account?</div>
         </div>
       </Router>
     )

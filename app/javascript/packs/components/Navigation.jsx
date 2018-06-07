@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom"
 
 const Buttons = () => (
   <ul className="buttons">
-    <li className="login"><Link to="/login">Login</Link></li>
+    <li className="login"><div data-modal="popup">Login</div></li>
   </ul>
 )
 
