@@ -5,6 +5,7 @@ import Login from "./Login"
 const MainVisual = () => (
   <div>
     <div className="modal">
+      <div className="modal-overlay"></div>
       <Login/>
     </div>
     <div className="main-visual">
