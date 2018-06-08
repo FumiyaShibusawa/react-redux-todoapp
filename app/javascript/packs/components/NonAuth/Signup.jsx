@@ -3,8 +3,28 @@ import { Field, reduxForm } from "redux-form"
 import { BrowserRouter as Router, Link } from "react-router-dom"
 
 class Signup extends React.Component {
-  handleSubmit = (values) => {
-    console.log(values)
+  handleSubmit = (e) => {
+    let email, password;
+    for (let i = 0; i < e.target.children.length; i++) {
+      if (e.target.children[i].name == "email") {
+        email = e.target.children[i].value;
+      }
+      if (e.target.children[i].name == "password") {
+        password = e.target.children[i].value;
+      }
+    }
+    fetch("/users.json", {
+      method: "POST",
+      body: JSON.stringify({ user: { email: email, password: password } }),
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    })
+    .then(response => response.json())
+    .then(
+      result => (console.log(result)),
+      error => (console.log(error))
+    )
   }
 
   render() {
@@ -14,7 +34,7 @@ class Signup extends React.Component {
           <h1>Register</h1>
           <form onSubmit={ (e) => {
             e.preventDefault();
-            this.handleSubmit(e.target);
+            this.handleSubmit(e);
           } }>
             <Field
             name="email"
@@ -25,7 +45,7 @@ class Signup extends React.Component {
             <Field
             name="password"
             component="input"
-            type="text"
+            type="password"
             placeholder="Enter your password"
             />
             <button type="submit">Register</button>
