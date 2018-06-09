@@ -5,5 +5,6 @@ class User
   has_many :todo_lists
 
   field :name, type: String
+  field :email, type: String
   field :password, type: String
 end

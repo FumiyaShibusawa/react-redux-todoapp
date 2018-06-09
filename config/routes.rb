@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get "/login" => "todo_lists#index"
   resources :todo_lists
   resources :todos
+  resources :users
 end

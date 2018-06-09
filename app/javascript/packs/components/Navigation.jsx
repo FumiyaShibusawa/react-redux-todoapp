@@ -8,23 +8,30 @@ const Buttons = () => (
   </ul>
 )
 
-const Navigation = () => (
-  <Router>
-    <header className={ localStorage.getItem("jwt") ? "" : "non-auth" }>
-      <div className="inner">
-        <nav>
-          <div className="logo">
-            <Link to="/"><i className="fa fa-home"></i></Link>
+class Navigation extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <Router>
+        <header className={ this.props.jwt_authorized ? "" : "non-auth" }>
+          <div className="inner">
+            <nav>
+              <div className="logo">
+                <Link to="/"><i className="fa fa-home"></i></Link>
+              </div>
+              {
+                this.props.jwt_authorized ?
+                <ul><li className="user-name">F.Shibusawa</li></ul> :
+                <Buttons/>
+              }
+            </nav>
           </div>
-          {
-            localStorage.getItem("jwt") ?
-            <ul><li className="user-name">F.Shibusawa</li></ul> :
-            <Buttons/>
-          }
-        </nav>
-      </div>
-    </header>
-  </Router>
-)
+        </header>
+      </Router>
+    )
+  }
+}
 
 export default Navigation

@@ -65,7 +65,7 @@ header {
   padding: 100px 30px;
   form {
     margin-bottom: 30px;
-    input[type="text"] {
+    input[type="text"], input[type="password"] {
       appearance: none;
       -webkit-appearance: none;
       border: 0;

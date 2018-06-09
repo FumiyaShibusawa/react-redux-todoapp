@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Field, reduxForm } from "redux-form"
 
 class Login extends React.Component {
   handleSubmit = (values) => {
@@ -14,18 +13,8 @@ class Login extends React.Component {
           e.preventDefault();
           this.handleSubmit(e.target);
         } }>
-          <Field
-          name="email"
-          component="input"
-          type="text"
-          placeholder="Enter your email"
-          />
-          <Field
-          name="password"
-          component="input"
-          type="text"
-          placeholder="Enter your password"
-          />
+          <input name="email" type="text" placeholder="Enter your email" autoComplete="username"/>
+          <input name="password" type="password" placeholder="Enter your password" autoComplete="current-password"/>
           <button type="submit">Login</button>
         </form>
       </div>
@@ -34,6 +23,4 @@ class Login extends React.Component {
 }
 
 
-export default reduxForm({
-  form: "login"
-})(Login)
+export default Login

@@ -1,43 +1,22 @@
 import * as React from "react"
-import { Field, reduxForm } from "redux-form"
-import { BrowserRouter as Router, Link } from "react-router-dom"
 
-class Signup extends React.Component {
-  handleSubmit = (values) => {
-    console.log(values)
-  }
-
+class SignUp extends React.Component {
   render() {
     return(
-      <Router>
         <div className="signup-form">
           <h1>Register</h1>
           <form onSubmit={ (e) => {
             e.preventDefault();
-            this.handleSubmit(e.target);
+            this.props.handleSignUp(e);
           } }>
-            <Field
-            name="email"
-            component="input"
-            type="text"
-            placeholder="Enter your email"
-            />
-            <Field
-            name="password"
-            component="input"
-            type="text"
-            placeholder="Enter your password"
-            />
+            <input name="email" type="text" placeholder="Enter your email" autoComplete="username"/>
+            <input name="password" type="password" placeholder="Enter your password" autoComplete="current-password"/>
             <button type="submit">Register</button>
           </form>
           <div className="goto-login" data-modal="popup">Already have your account?</div>
         </div>
-      </Router>
     )
   }
 }
 
-
-export default reduxForm({
-  form: "login"
-})(Signup)
+export default SignUp
