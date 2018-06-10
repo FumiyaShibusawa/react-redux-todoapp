@@ -3,8 +3,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       respond_to do |format|
-        format.html
-        format.json { render json: { jwt_authorized: true } }
+        format.html { redirect_to todo_lists_path }
       end
     end
   end

@@ -1,5 +1,6 @@
 import * as React from "react"
 import { connect } from "react-redux"
+import Navigation from "../components/Navigation"
 import TodoList from "../components/TodoList"
 import Todo from "../components/Todo"
 import { addTodoList, fetchTodoLists, deleteTodoList } from "../actions/TodoListActions"
@@ -54,22 +55,27 @@ class TodoListContainer extends React.Component {
   }
   render() {
     return (
-      <div className="todolist_container">
-        <TodoList
-        todo_lists={ this.props.todo_lists }
-        toggleTodoListForm={ this.props.toggleTodoListForm }
-        addTodoList={ this.props.addTodoList }
-        showTodos={ this.showTodos }
-        deleteTodoList={ this.props.deleteTodoList }
-        />
-        <Todo
-        todo_list={ this.props.todo_lists[this.state.todo_list_idx] }
-        toggleTodoForm={ this.props.toggleTodoForm }
-        addTodo={ this.props.addTodo }
-        deleteTodo={ this.props.deleteTodo }
-        completeTodo={ this.props.completeTodo }
-        num={ this.state.todo_list_idx }
-        />
+      <div>
+        <Navigation/>
+        <main>
+          <div className="todolist_container">
+            <TodoList
+            todo_lists={ this.props.todo_lists }
+            toggleTodoListForm={ this.props.toggleTodoListForm }
+            addTodoList={ this.props.addTodoList }
+            showTodos={ this.showTodos }
+            deleteTodoList={ this.props.deleteTodoList }
+            />
+            <Todo
+            todo_list={ this.props.todo_lists[this.state.todo_list_idx] }
+            toggleTodoForm={ this.props.toggleTodoForm }
+            addTodo={ this.props.addTodo }
+            deleteTodo={ this.props.deleteTodo }
+            completeTodo={ this.props.completeTodo }
+            num={ this.state.todo_list_idx }
+            />
+          </div>
+        </main>
       </div>
     )
   }

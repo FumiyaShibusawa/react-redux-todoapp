@@ -4,16 +4,25 @@ import { Provider } from "react-redux"
 import { createStore, applyMiddleware } from "redux"
 import thunkMiddleware from "redux-thunk"
 import rootReducer from "../reducers"
-import AuthContainer from "../containers/AuthContainer"
+import NonAuth from "../components/NonAuth"
+import TodoListContainer from "../containers/TodoListContainer"
 
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
-const todolist_root = document.getElementById("todolist-root")
-if (todolist_root) {
+const nonAuthRoot = document.getElementById("non-auth-root")
+const todoListRoot = document.getElementById("todolist-root")
+if (nonAuthRoot) {
   render(
     <Provider store={ store }>
-      <AuthContainer/>
+      <NonAuth/>
     </Provider>,
-    todolist_root
+    nonAuthRoot
+  )
+} else if (todoListRoot) {
+  render(
+    <Provider store={ store }>
+      <TodoListContainer/>
+    </Provider>,
+    todoListRoot
   )
 }
