@@ -9,7 +9,7 @@ export const submitSignUpForm = (e) => {
         password = e.target.children[i].value;
       }
     }
-    fetch("/users.json", {
+    fetch("/users", {
       method: "POST",
       body: JSON.stringify({ user: { email: email, password: password } }),
       headers: new Headers({ "Content-Type": "application/json" })
