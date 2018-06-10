@@ -1,6 +1,6 @@
 import * as React from "react"
-import Navigation from "../components/Navigation"
-import MainVisual from "../components/NonAuth/MainVisual"
+import Navigation from "../../components/Navigation"
+import MainVisual from "./MainVisual"
 
 class NonAuth extends React.Component {
   constructor(props) {
