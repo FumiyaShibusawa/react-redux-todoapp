@@ -1,4 +1,4 @@
-export const submitSignUpForm = (e) => {
+export const submitSignupForm = (e) => {
   return dispatch => {
     let email, password;
     for (let i = 0; i < e.target.children.length; i++) {
@@ -18,18 +18,18 @@ export const submitSignUpForm = (e) => {
     .then(
       result => {
         localStorage.setItem("jwt", "hogefuga")
-        dispatch(submitSignUpFormSuccess(result))
+        dispatch(submitSignupFormSuccess(result))
       },
-      error => (dispatch(submitSignUpFormFailed(error)))
+      error => (dispatch(submitSignupFormFailed(error)))
     )
   }
 }
 
-const submitSignUpFormSuccess = (result) => ({
+const submitSignupFormSuccess = (result) => ({
   type: "SIGNUP",
   result: result
 })
-const submitSignUpFormFailed = (errors) => ({
+const submitSignupFormFailed = (errors) => ({
   type: "SIGNUP_FAILED",
   errors: errors
 })
