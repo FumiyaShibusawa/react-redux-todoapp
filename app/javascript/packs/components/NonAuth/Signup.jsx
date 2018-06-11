@@ -1,6 +1,6 @@
 import * as React from "react"
 
-class SignUp extends React.Component {
+class Signup extends React.Component {
   render() {
     return(
         <div className="signup-form">
@@ -16,4 +16,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp
+export default Signup

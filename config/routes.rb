@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :todo_lists
   resources :todos
   resources :users
+  resources :sessions
 end
