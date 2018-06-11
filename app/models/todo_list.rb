@@ -6,4 +6,7 @@ class TodoList
   belongs_to :user
 
   field :name, type: String
+
+  validate :name, :email, presence: true
+
 end

@@ -6,4 +6,8 @@ class Todo
 
   field :name, type: String
   field :completed, type: Boolean, default: false
+
+  validate :name, :email, presence: true
+  validate :todo_list, presence: true
+
 end
