@@ -7,6 +7,6 @@ class TodoList
 
   field :name, type: String
 
-  validate :name, :email, presence: true
+  validates :name, :email, presence: true
 
 end
