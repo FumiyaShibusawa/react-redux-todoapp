@@ -1,10 +1,12 @@
 export const addTodo = (todo, todo_list_id, index) => {
+  const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
   return dispatch => {
     fetch("/todos.json", {
       method: "POST",
       body: JSON.stringify({ todo: { name: todo, todo_list_id: todo_list_id } }),
       headers: new Headers({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authentication": `Bearer ${jwtToken}`
       })
     })
     .then(response => response.json())
@@ -37,11 +39,13 @@ export const showTodos = (todo_list) => ({
 
 
 export const deleteTodo = (todo) => {
+  const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
   return dispatch => {
     fetch(`/todos/${todo._id["$oid"]}.json`, {
       method: "DELETE",
       headers: new Headers({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authentication": `Bearer ${jwtToken}`
       })
     })
     .then(response => response.json())
@@ -62,12 +66,14 @@ const deleteTodoFailed = (todo) => ({
 })
 
 export const completeTodo = (todo) => {
+  const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
   return dispatch => {
     fetch(`/todos/${todo._id["$oid"]}.json`, {
       method: "PATCH",
       body: JSON.stringify({ todo: { completed: !todo.completed } }),
       headers: new Headers({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authentication": `Bearer ${jwtToken}`
       })
     })
     .then(response => response.json())

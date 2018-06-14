@@ -53,67 +53,6 @@ header {
     }
   }
 }
-[data-modal="popup"] {
-  cursor: pointer;
-}
-.signup-form, .login-form {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 100px 30px;
-  form {
-    margin-bottom: 30px;
-    input[type="text"], input[type="password"] {
-      appearance: none;
-      -webkit-appearance: none;
-      border: 0;
-      display: inline-block;
-      width: 100%;
-      border-bottom: 1px solid $utility-color;
-      margin-bottom: 40px;
-    }
-    button[type="submit"] {
-      appearance: none;
-      -webkit-appearance: none;
-      border: 0;
-      padding: 15px 30px;
-      border-radius: 25px;
-      background-color: $base-color;
-      color: #fff;
-      cursor: pointer;
-    }
-  }
-  .goto-login {
-    color: darken($utility-color, 50%);
-  }
-}
-.modal {
-  display: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: transparentize(#0a0a0a, .4);
-    z-index: 1;
-  }
-  .login-form {
-    position: absolute;
-    max-width: 400px;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 2;
-  }
-}
-.inner {
-  max-width: 1000px;
-  width: 100%;
-  margin: auto;
-  position: relative;
-}
 #todolist-root {
   .todolist_container {
     max-width: 950px;

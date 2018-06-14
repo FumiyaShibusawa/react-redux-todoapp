@@ -1,8 +1,8 @@
 class TodosController < ApplicationController
   def create
-    todo = TodoList.find(todo_params[:todo_list_id]).todos.new(todo_params)
+    todo = TodoList.where(user_id: current_user.id).find(todo_params[:todo_list_id]).todos.new(todo_params)
     if todo.save
-      todo_data = JSON.parse(TodoList.all.to_json(include: :todos))
+      todo_data = TodoList.where(user_id: current_user.id).to_json(include: :todos)
       respond_to do |format|
         format.html
         format.json { render json: todo_data }
@@ -13,7 +13,7 @@ class TodosController < ApplicationController
   def update
     todo = Todo.find(params[:id])
     if todo.update(todo_params)
-      todo_data = JSON.parse(TodoList.all.to_json(include: :todos))
+      todo_data = TodoList.where(user_id: current_user.id).to_json(include: :todos)
       respond_to do |format|
         format.html
         format.json { render json: todo_data }
@@ -24,7 +24,7 @@ class TodosController < ApplicationController
   def destroy
     todo = Todo.find(params[:id])
     if todo.destroy
-      todo_data = JSON.parse(TodoList.all.to_json(include: :todos))
+      todo_data = TodoList.where(user_id: current_user.id).to_json(include: :todos)
       respond_to do |format|
         format.html
         format.json { render json: todo_data }

@@ -16,6 +16,8 @@ $(function() {
     setModalPosition();
   });
 
+  const csrfToken = $("meta[name='csrf-token']")[0].content;
+  $("input[name='authenticity_token']").val(csrfToken);
 
   $(window).on("resize", function() {
     setModalPosition();
