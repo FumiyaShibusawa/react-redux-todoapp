@@ -2,31 +2,31 @@ class TodoListsController < ApplicationController
   before_action :authenticate
 
   def index
-    todo_list_data = JSON.parse TodoList.all.to_json(include: :todos)
+    todo_list_data = TodoList.where(user_id: current_user.id)
     respond_to do |format|
       format.html
-      format.json { render json: todo_list_data }
+      format.json { render json: todo_list_data.to_json(include: :todos) }
     end
   end
 
   def create
-    todo_list = TodoList.new(todo_list_params)
+    todo_list = current_user.todo_lists.new(todo_list_params)
     if todo_list.save
-      todo_list_data = JSON.parse(TodoList.all.to_json(include: :todos))
+      todo_list_data = TodoList.where(user_id: current_user.id)
       respond_to do |format|
         format.html
-        format.json { render json: todo_list_data }
+        format.json { render json: todo_list_data.to_json(include: :todos) }
       end
     end
   end
 
   def destroy
-    todo_list = TodoList.find(params[:id])
+    todo_list = current_user.todo_lists.find(params[:id])
     if todo_list.destroy
-      todo_list_data = JSON.parse(TodoList.all.to_json(include: :todos))
+      todo_list_data = TodoList.where(user_id: current_user.id)
       respond_to do |format|
         format.html
-        format.json { render json: todo_list_data }
+        format.json { render json: todo_list_data.to_json(include: :todos) }
       end
     end
   end

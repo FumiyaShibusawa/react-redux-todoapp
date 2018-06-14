@@ -7,7 +7,7 @@ class Login extends React.Component {
         <h1>Login</h1>
         <form action="/sessions" method="POST" charSet="UTF-8">
           <input name="authenticity_token" type="hidden"/>
-          <input name="user[name]" type="text" placeholder="Enter your name" autoComplete="username"/>
+          <input name="session[name]" type="text" placeholder="Enter your name" autoComplete="username"/>
           <input name="session[email]" type="text" placeholder="Enter your email" autoComplete="username"/>
           <input name="session[password]" type="password" placeholder="Enter your password" autoComplete="current-password"/>
           <button type="submit">Login</button>

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate
 
   require "auth"
+  require "logger"
 
   def authenticate
     if current_user.nil?
@@ -13,10 +14,8 @@ class ApplicationController < ActionController::Base
 
   def current_user
     if jwt_token.present?
-      decoded_token = Auth.decode(jwt_token)
-      system("echo #{jwt_token}")
-      system("echo #{decoded_token}")
-      @current_user = User.where(email: decoded_token[0]["email"]).first
+      decoded_token = eval Auth.decode(jwt_token)[0]
+      User.where(email: decoded_token["email"]).first
     end
   end
 
@@ -25,9 +24,10 @@ class ApplicationController < ActionController::Base
     when "application/json"
       return nil if request.headers["Authentication"].nil?
       jwt_token = request.headers["Authentication"].split(" ").last
+      jwt_token.slice!(/jwt_token=/)
     when "text/html"
       return nil if cookies["jwt_token"].nil?
-      jwt_token = cookies["jwt_token"].split(" ").last
+      jwt_token = cookies["jwt_token"]
     end
     jwt_token
   end
