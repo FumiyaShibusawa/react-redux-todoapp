@@ -1,10 +1,38 @@
 import * as React from "react"
 
 class Signup extends React.Component {
-  componentDidMount = () => {
-    const csrfToken = $("meta[name='csrf-token']")[0].content;
-    $("input[name='authenticity_token']").val(csrfToken);
-  }
+  // handleSubmit = (e) => {
+  //   const userParams = { authenticity_token: "", user: { name: "", email: "", password: "" } }
+  //   for (let i = 0; i < e.children.length; i++) {
+  //     if (e.children[i].name == "authenticity_token") {
+  //       userParams["authenticity_token"] = e.children[i].value
+  //     }
+  //     if (e.children[i].name == "name") {
+  //       userParams["user"]["name"] = e.children[i].value
+  //     }
+  //     if (e.children[i].name == "email") {
+  //       userParams["user"]["email"] = e.children[i].value
+  //     }
+  //     if (e.children[i].name == "password") {
+  //       userParams["user"]["password"] = e.children[i].value
+  //     }
+  //   }
+  //   fetch("/users.json", {
+  //     method: "POST",
+  //     body: JSON.stringify(userParams),
+  //     headers: new Headers({
+  //       "Content-Type": "application/json"
+  //     })
+  //   })
+  //   .then(response => response.json())
+  //   .then(
+  //     result => {
+  //       document.cookie = `jwt_token=${result["jwt_token"]}`
+  //       document.location.href = "/todo_lists"
+  //     },
+  //     error => (console.log(error))
+  //   )
+  // }
   render() {
     return(
       <div className="signup-form">

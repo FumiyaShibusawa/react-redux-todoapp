@@ -9,6 +9,7 @@ import TodoListContainer from "../containers/TodoListContainer"
 
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+store.subscribe(() => console.log(store.getState()))
 const nonAuthRoot = document.getElementById("non-auth-root")
 const todoListRoot = document.getElementById("todolist-root")
 if (nonAuthRoot) {

@@ -1,4 +1,6 @@
 class TodoListsController < ApplicationController
+  before_action :authenticate
+
   def index
     todo_list_data = JSON.parse TodoList.all.to_json(include: :todos)
     respond_to do |format|
