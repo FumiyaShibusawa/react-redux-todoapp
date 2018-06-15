@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   skip_before_action :authenticate
 
   def index
+    redirect_to todo_lists_path if current_user
   end
 
   def create
@@ -17,9 +18,14 @@ class SessionsController < ApplicationController
       respond_to do |format|
         format.html {
           redirect_to root_path,
-          notice: "Login failed. Make sure to check your username, email, and password." }
+          alert: "Login failed. Make sure to check your username, email, and password." }
       end
     end
+  end
+
+  def destroy
+    cookies.delete :jwt_token
+    redirect_to root_path, notice: "Thanks for coming! Hope you come back soon!"
   end
 
   private

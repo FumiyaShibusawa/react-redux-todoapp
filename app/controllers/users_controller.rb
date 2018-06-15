@@ -9,12 +9,10 @@ class UsersController < ApplicationController
       cookies["jwt_token"] = jwt_token
       respond_to do |format|
         format.html { redirect_to todo_lists_path }
-        format.json { render json: { jwt_token: jwt_token } }
       end
     else
       respond_to do |format|
-        format.html { redirect_to root_path, notice: @user.errors }
-        format.json { render json: @user.errors.to_json }
+        format.html { redirect_to root_path, alert: @user.errors }
       end
     end
   end

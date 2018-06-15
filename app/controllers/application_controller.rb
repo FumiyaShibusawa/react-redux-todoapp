@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   def current_user
     if jwt_token.present?
       decoded_token = eval Auth.decode(jwt_token)[0]
-      User.where(email: decoded_token["email"]).first
+      @current_user = User.where(email: decoded_token["email"]).first
     end
   end
 
