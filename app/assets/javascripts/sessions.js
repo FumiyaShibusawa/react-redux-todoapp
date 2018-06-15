@@ -26,4 +26,9 @@ $(function() {
   $(".modal-overlay").on("click", function() {
     $(".modal").toggle();
   });
+
+  setTimeout(function() {
+    $(".notice").slideUp();
+  }, 3000);
+
 });
