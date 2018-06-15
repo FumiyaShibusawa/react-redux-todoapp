@@ -11,12 +11,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  toggleTodoListForm: () => {
-    $("#todo_list_form").toggle();
-  },
-  toggleTodoForm: () => {
-    $("#todo_form").toggle();
-  },
   fetchTodoLists: () => {
     dispatch(fetchTodoLists());
   },
@@ -60,14 +54,12 @@ class TodoListContainer extends React.Component {
           <div className="todolist_container">
             <TodoList
             todo_lists={ this.props.todo_lists }
-            toggleTodoListForm={ this.props.toggleTodoListForm }
             addTodoList={ this.props.addTodoList }
             showTodos={ this.showTodos }
             deleteTodoList={ this.props.deleteTodoList }
             />
             <Todo
             todo_list={ this.props.todo_lists[this.state.todo_list_idx] }
-            toggleTodoForm={ this.props.toggleTodoForm }
             addTodo={ this.props.addTodo }
             deleteTodo={ this.props.deleteTodo }
             completeTodo={ this.props.completeTodo }

@@ -1,6 +1,16 @@
 import * as React from "react"
 
 class Todo extends React.Component {
+  showForm = (e) => {
+    $(e.target.parentElement).hide();
+    $('#todo_form').show();
+  }
+  hideForm = (e) => {
+    e.preventDefault();
+    $('#todo_form').hide();
+    $('[data-add="show-todo"]').show();
+  }
+
   render(){
     let input;
     return (
@@ -35,18 +45,24 @@ class Todo extends React.Component {
                     }
                   })() }
                 </ul>
-                <div onClick={ this.props.toggleTodoForm } >
-                  <i className="fa fa-plus"></i>
-                  <span>add new todo</span>
-                </div>
-                <div id="todo_form" style={{ display: 'none' }}>
-                  <input type="text" ref= { node => { input = node } }/>
-                  <input type="submit" value="送信" onClick={ () => {
-                    if (input) {
-                      this.props.addTodo(input.value, this.props.todo_list._id["$oid"], this.props.num);
-                      input.value = ""; // テキストボックス内の値をクリア
-                    }
-                  } }/>
+                <div className="add-button">
+                  <div data-add="show-todo" onClick={ this.showForm }>
+                    <div className="plus">+</div>
+                    <span>add new todo</span>
+                  </div>
+                  <form id="todo_form" style={{ display: 'none' }} onSubmit={ (e) => {
+                      if (input) {
+                        e.preventDefault();
+                        this.props.addTodo(input.value, this.props.todo_list._id["$oid"], this.props.num);
+                        input.value = ""; // テキストボックス内の値をクリア
+                      }
+                    } }>
+                    <input className="text-box" type="text" ref= { node => { input = node } }/>
+                    <div className="button-cont">
+                      <button type="submit" value="add">add</button>
+                      <div className="cancel" data-add="cancel" onClick={ this.hideForm }>cancel</div>
+                    </div>
+                  </form>
                 </div>
               </div>
             )
