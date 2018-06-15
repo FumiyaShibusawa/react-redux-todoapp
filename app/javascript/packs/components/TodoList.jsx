@@ -5,7 +5,7 @@ class TodoList extends React.Component {
     let input;
     return (
       <div className="todolist_component">
-        <ul>
+        <ul className="todolists">
             { this.props.todo_lists.map( (todo_list, i) => (
               <li
               key={ `${todo_list.name}_${todo_list._id["$oid"]}` }
@@ -23,7 +23,7 @@ class TodoList extends React.Component {
         </ul>
         <div onClick={ this.props.toggleTodoListForm }>
           <i className="fa fa-plus"></i>
-          <span>Todoリストを追加する</span>
+          <span>add new todolist</span>
         </div>
         <div id="todo_list_form" style={ { display: 'none' } }>
           <input type="text" ref= { node => { input = node } }/>

@@ -56,7 +56,6 @@ class TodoListContainer extends React.Component {
   render() {
     return (
       <div>
-        <Navigation/>
         <main>
           <div className="todolist_container">
             <TodoList

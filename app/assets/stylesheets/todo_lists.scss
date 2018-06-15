@@ -3,59 +3,42 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "variables";
 
-main, footer, section, aside, article {
-  padding: 30px;
-  box-sizing: border-box;
-  h1, h2, h3, h4, h5 {
-    margin: 0 0 30px;
+.mypage-header {
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  padding: 10px 30px;
+  .user-name {
+    display: inline-block;
+    margin-right: 10px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 50px;
+    background-color: $base-color;
+    text-align: center;
+    color: #fff;
   }
-  p {
-    margin: 0 0 20px;
-  }
-}
-img {
-  width: 100%;
-  display: block;
-}
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-header {
-  padding: 15px 30px;
-  position: sticky;
-  nav {
-    text-align: right;
-    position: relative;
-    .logo {
-      position: absolute;
-      left: 0;
-      i {
-        font-size: 1.5rem;
-      }
-    }
-    ul {
-      display: inline-block;
-      line-height: 1.5rem;
-      &.buttons {
-        li {
-          display: inline-block;
-          a {
-            padding: 10px 5px;
-          }
-        }
-      }
+  .logout {
+    display: inline-block;
+    color: darken($utility-color, 30%);
+    border: 1px solid;
+    border-color: darken($utility-color, 20%);
+    border-radius: 18px;
+    padding: 5px 20px;
+    transition: all .3s ease-in-out;
+    &:hover {
+      background-color: #fff;
+      color: initial;
     }
   }
 }
+
 #todolist-root {
+  main {
+    background-color: $utility-color;
+    padding: 15px 30px;
+  }
   .todolist_container {
-    max-width: 950px;
+    max-width: 1000px;
     margin: auto;
     display: -ms-flexbox;
     display: -webkit-box;
@@ -71,17 +54,31 @@ header {
       }
     }
     .todolist_component {
-      flex-basis: 270px;
+      background-color: #fff;
+      flex-basis: 285px;
       padding: 30px;
       box-sizing: border-box;
+      box-shadow: 0 5px 10px 0px rgba(0,0,0,0.1);
+      .todolists {
+        margin-bottom: 30px;
+        li {
+          padding: 10px 0;
+          border-bottom: 1px solid $utility-color;
+          &:first-child {
+            border-top: 1px solid $utility-color;
+          }
+        }
+      }
     }
     .todo_component {
-      flex-basis: 680px;
+      flex-basis: 700px;
+      margin-left: 15px;
       padding: 30px;
       box-sizing: border-box;
       background-color: #ffffff;
       border-left: 1px solid #f1f1f1;
       border-right: 1px solid #f1f1f1;
+      box-shadow: 0 5px 10px 0px rgba(0,0,0,0.1);
       .todos {
         margin-bottom: 30px;
         li {

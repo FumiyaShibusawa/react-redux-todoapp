@@ -1,0 +1,21 @@
+- if @current_user
+  header.mypage-header
+    .inner
+      nav
+        .logo
+          = link_to root_path
+            i.fa.fa-home
+        ul
+          li.user-name = @current_user.name.slice(0)
+          li.logout
+            = link_to "Logout", session_path(id: @current_user.id), method: :delete
+- else
+  header.non-auth
+    .inner
+      nav
+        .logo
+          = link_to todo_lists_path
+            i.fa.fa-home
+        ul.buttons
+          li.login
+            span data-modal="popup" Login

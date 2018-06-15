@@ -10,5 +10,10 @@ html lang="ja"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = yield :head
   body
+    - if notice.present?
+      p.flash.notice = notice
+    - if alert.present?
+      p.flash.alert = alert
+    = yield :header
     = yield :main
     = yield :bottom_script

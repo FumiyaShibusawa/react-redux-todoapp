@@ -37,7 +37,7 @@ class Todo extends React.Component {
                 </ul>
                 <div onClick={ this.props.toggleTodoForm } >
                   <i className="fa fa-plus"></i>
-                  <span>Todoを追加する</span>
+                  <span>add new todo</span>
                 </div>
                 <div id="todo_form" style={{ display: 'none' }}>
                   <input type="text" ref= { node => { input = node } }/>

@@ -9,7 +9,6 @@ class NonAuth extends React.Component {
   render() {
     return (
       <div className="wall-paper">
-        <Navigation/>
         <main className="wrapper">
           <MainVisual/>
         </main>
