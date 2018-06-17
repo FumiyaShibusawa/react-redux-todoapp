@@ -1,7 +1,7 @@
 # README
 
 This is my sample todo app built with React and Redux.
-Feel free to reuse or review any of the codebase for your study after reading introduction doc of React/Redux(if it ever helps...).
+Feel free to reuse or review any of the codebase for your reference especially if you just finished reading introduction of React/Redux(if it ever helps...).
 
 # Environment
 
