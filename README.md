@@ -3,8 +3,7 @@
 This is my sample todo app built with React and Redux.
 Feel free to reuse or review any of the codebase for your reference(if it ever helps...).
 
-<img src="https://user-images.githubusercontent.com/17764944/41509405-0c34f23c-728e-11e8-8d8e-b93dee9e26bd.png" style="width:434px;margin-right:20px;"/>
-<img src="https://user-images.githubusercontent.com/17764944/41509406-0c5e6450-728e-11e8-95e6-479f29c79036.png" style="width:434px;"/>
+<img src="https://user-images.githubusercontent.com/17764944/41509405-0c34f23c-728e-11e8-8d8e-b93dee9e26bd.png" width="430px"/><img src="https://user-images.githubusercontent.com/17764944/41509406-0c5e6450-728e-11e8-95e6-479f29c79036.png" width="430px;"/>
 
 # Environment
 
