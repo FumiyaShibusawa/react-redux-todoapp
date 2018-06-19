@@ -33,9 +33,10 @@ $ rails s
 
 # Todo
 
-- Error handling for redux actions
+- Error handling for Redux actions
 - Add update actions
 - Refactor TodoListContainer.jsx with BindActionCreators?
+- Try CSS module
 
 # Contribute
 Please create a new issue if you find anything that you think is a problem or can be improved!
