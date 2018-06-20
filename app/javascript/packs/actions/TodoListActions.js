@@ -54,6 +54,35 @@ const addTodoListFailed = (todo_lists) => ({
 })
 
 
+export const updateTodoList = (todo_list, value) => {
+  const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
+  return dispatch => {
+    fetch(`/todo_lists/${todo_list._id["$oid"]}.json`, {
+      method: "PATCH",
+      body: JSON.stringify({ todo_list: { name: value } }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        "Authentication": `Bearer ${jwtToken}`
+      })
+    })
+    .then(response => response.json())
+    .then(
+      result => (dispatch(updateTodoListSuccess(result))),
+      error => (dispatch(updateTodoListFailed(error)))
+    )
+  }
+}
+
+const updateTodoListSuccess = (todo_lists) => ({
+  type: "UPDATE_TODOLIST",
+  todo_lists: todo_lists
+})
+const updateTodoListFailed = (todo_lists) => ({
+  type: "UPDATE_TODOLIST_FAILED",
+  todo_lists: todo_lists
+})
+
+
 export const deleteTodoList = (todo_list) => {
   const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
   return dispatch => {
