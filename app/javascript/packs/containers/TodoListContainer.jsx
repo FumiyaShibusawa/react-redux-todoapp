@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import Navigation from "../components/Navigation"
 import TodoList from "../components/TodoList"
 import Todo from "../components/Todo"
-import { addTodoList, fetchTodoLists, deleteTodoList } from "../actions/TodoListActions"
+import { addTodoList, updateTodoList, fetchTodoLists, deleteTodoList } from "../actions/TodoListActions"
 import { addTodo, showTodos, deleteTodo, completeTodo } from "../actions/TodoActions"
 
 const mapStateToProps = state => ({
@@ -16,6 +16,9 @@ const mapDispatchToProps = dispatch => ({
   },
   addTodoList: (todo_list) => {
     dispatch(addTodoList(todo_list));
+  },
+  updateTodoList: (todo_list, value) => {
+    dispatch(updateTodoList(todo_list, value));
   },
   deleteTodoList: (todo_list) => {
     dispatch(deleteTodoList(todo_list));
@@ -55,6 +58,7 @@ class TodoListContainer extends React.Component {
             <TodoList
             todo_lists={ this.props.todo_lists }
             addTodoList={ this.props.addTodoList }
+            updateTodoList={ this.props.updateTodoList }
             showTodos={ this.showTodos }
             deleteTodoList={ this.props.deleteTodoList }
             />

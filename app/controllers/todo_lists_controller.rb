@@ -2,9 +2,6 @@ class TodoListsController < ApplicationController
   before_action :authenticate
 
   def index
-    logger = Logger.new("log/hoge.log")
-    logger.info current_user
-    logger.info @current_user
     todo_list_data = TodoList.where(user_id: current_user.id)
     respond_to do |format|
       format.html
@@ -24,8 +21,8 @@ class TodoListsController < ApplicationController
   end
 
   def update
-    todo_list = current_user.todo_lists.find(todo_lists_params)
-    if todo_list.save
+    todo_list = current_user.todo_lists.find(params[:id])
+    if todo_list.update(todo_list_params)
       todo_list_data = TodoList.where(user_id: current_user.id)
       respond_to do |format|
         format.html

@@ -46,11 +46,65 @@
     height: 100%;
     li {
       position: relative;
-      .delete {
+      .menu-ellipsis {
         position: absolute;
         right: 10px;
         cursor: pointer;
         color: $utility-color;
+        transform: rotate(90deg);
+      }
+    }
+    .js-todolist-menu {
+      position: absolute;
+      background-color: #fff;
+      right: 0;
+      width: 100px;
+      z-index: 1;
+      top: 100%;
+      box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      box-sizing: border-box;
+      border: 1px solid #eee;
+      ul li {
+        border: none !important;
+        padding: 10px !important;
+      }
+    }
+    #todo_list_form, #todo_form, .js-todo_list_edit_form, .js-todo_edit_form {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      .text-box {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid darken($utility-color, 20%);
+        border-radius: 20px;
+        padding: 10px;
+        margin-bottom: 10px;
+        &:focus {
+          outline: 0;
+        }
+      }
+      .button-cont {
+        button[type="submit"] {
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          border: 0;
+          padding: 10px 30px;
+          border-radius: 25px;
+          background-color: $base-color;
+          color: #fff;
+          cursor: pointer;
+          margin-right: 10px;
+        }
+        .cancel {
+          display: inline-block;
+          padding: 10px 15px;
+        }
       }
     }
     .add-button {
@@ -58,7 +112,7 @@
       position: relative;
       cursor: pointer;
       .plus {
-        display: inline-block;
+        position: absolute;
         width: 20px;
         height: 20px;
         padding: 1px;
@@ -68,41 +122,11 @@
         border-radius: 50%;
         margin-right: 10px;
       }
-      #todo_list_form, #todo_form {
-        width: 100%;
-        position: absolute;
-        top: 0;
-        .text-box {
-          appearance: none;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          width: 100%;
-          box-sizing: border-box;
-          border: 1px solid darken($utility-color, 20%);
-          border-radius: 20px;
-          padding: 10px;
-          margin-bottom: 10px;
-          &:focus {
-            outline: 0;
-          }
-        }
-        .button-cont {
-          button[type="submit"] {
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            border: 0;
-            padding: 10px 30px;
-            border-radius: 25px;
-            background-color: $base-color;
-            color: #fff;
-            cursor: pointer;
-            margin-right: 10px;
-          }
-          .cancel {
-            display: inline-block;
-          }
-        }
+      .add-button-text {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        line-height: 24px;
       }
     }
     .todolist_component {

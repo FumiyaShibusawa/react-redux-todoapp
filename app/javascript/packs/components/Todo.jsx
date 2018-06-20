@@ -34,21 +34,21 @@ class Todo extends React.Component {
                           ></span>
                           <span>{ todo.name }</span>
                           <span
-                          className="delete"
+                          className="menu-ellipsis"
                           key={ `${todo.name}_${todo._id["$oid"]}` }
                           onClick={ (e) => {
                             e.stopPropagation();
                             this.props.deleteTodo(todo);
-                          } }>×</span>
+                          } }>︙</span>
                         </li>
                       ))
                     }
                   })() }
                 </ul>
                 <div className="add-button">
-                  <div data-add="show-todo" onClick={ this.showForm }>
+                  <div data-add="show-todo">
                     <div className="plus">+</div>
-                    <span>add new todo</span>
+                    <span className="add-button-text" onClick={ this.showForm }>add new todo</span>
                   </div>
                   <form id="todo_form" style={{ display: 'none' }} onSubmit={ (e) => {
                       if (input) {
