@@ -46,11 +46,12 @@
     height: 100%;
     li {
       position: relative;
-      .delete {
+      .menu-ellipsis {
         position: absolute;
         right: 10px;
         cursor: pointer;
         color: $utility-color;
+        transform: rotate(90deg);
       }
     }
     .add-button {
@@ -58,7 +59,7 @@
       position: relative;
       cursor: pointer;
       .plus {
-        display: inline-block;
+        position: absolute;
         width: 20px;
         height: 20px;
         padding: 1px;
@@ -67,6 +68,12 @@
         text-align: center;
         border-radius: 50%;
         margin-right: 10px;
+      }
+      .add-button-text {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        line-height: 24px;
       }
       #todo_list_form, #todo_form {
         width: 100%;
@@ -101,6 +108,7 @@
           }
           .cancel {
             display: inline-block;
+            padding: 10px 15px;
           }
         }
       }

@@ -23,21 +23,27 @@ class TodoList extends React.Component {
               onClick={ () => { this.props.showTodos(i) } }
               >{ todo_list.name }
               <span
-              className="delete"
+              className="menu-ellipsis"
               key={ `${todo_list.name}_${todo_list._id["$oid"]}` }
               onClick={ (e) => {
                 e.stopPropagation();
                 this.props.deleteTodoList(todo_list);
-              } }>×</span>
+              } }>︙</span>
+              <div className="todolist-menu" style={{ display: 'none' }}>
+                <ul>
+                  <li>edit</li>
+                  <li>delete</li>
+                </ul>
+              </div>
               </li>
             ) ) }
         </ul>
         <div className="add-button">
-          <div data-add="show-todolist" onClick={ this.showForm }>
+          <div data-add="show-todolist">
             <div className="plus">+</div>
-            <span>add new todolist</span>
+            <span className="add-button-text" onClick={ this.showForm }>add new todolist</span>
           </div>
-          <form id="todo_list_form" style={ { display: 'none' } } onSubmit={ (e) => {
+          <form id="todo_list_form" style={{ display: 'none' }} onSubmit={ (e) => {
               if (input) {
                 e.preventDefault();
                 this.props.addTodoList(input.value);
