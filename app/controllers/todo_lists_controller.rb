@@ -2,9 +2,6 @@ class TodoListsController < ApplicationController
   before_action :authenticate
 
   def index
-    logger = Logger.new("log/hoge.log")
-    logger.info current_user
-    logger.info @current_user
     todo_list_data = TodoList.where(user_id: current_user.id)
     respond_to do |format|
       format.html
