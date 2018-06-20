@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def authenticate
     if current_user.nil?
       render json: "not authorized" and return if request.format == "application/json"
-      redirect_to root_path, notice: "not authorized"
+      redirect_to root_path, alert: "Sorry! It seems you are not authorized..."
     end
   end
 
