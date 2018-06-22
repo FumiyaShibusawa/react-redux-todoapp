@@ -52,6 +52,10 @@
         cursor: pointer;
         color: $utility-color;
         transform: rotate(90deg);
+        transition: color .3s ease-in-out;
+        &:hover {
+          color: initial;
+        }
       }
     }
     .js-todolist-menu {
@@ -70,10 +74,8 @@
         padding: 10px !important;
       }
     }
-    #todo_list_form, #todo_form, .js-todo_list_edit_form, .js-todo_edit_form {
+    #todo_list_form, #todo_form, .js-todo-list-edit-form, .js-todo-edit-form {
       width: 100%;
-      position: absolute;
-      top: 0;
       .text-box {
         appearance: none;
         -webkit-appearance: none;

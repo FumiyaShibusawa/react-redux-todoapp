@@ -12,12 +12,15 @@ class TodoList extends React.Component {
   }
   showEditForm = (e, i) => {
     e.preventDefault();
+    e.persist();
     $(`#todolist-menu_${i}`).hide();
     $(`#todo_list_edit_form_${i}`).show();
+    $(`.list-element-${i}`).hide();
   }
   hideEditForm = (e, i) => {
     e.preventDefault();
     $(`#todo_list_edit_form_${i}`).hide();
+    $(`.list-element-${i}`).show();
   }
   toggleTodoListMenu = (e, i) => {
     $(`:not(#todolist-menu_${i}).js-todolist-menu`).hide();
@@ -34,17 +37,18 @@ class TodoList extends React.Component {
             <li
             key={ `${todo_list.name}_${todo_list._id["$oid"]}` }
             onClick={ () => { this.props.showTodos(i) } }
-            >{ todo_list.name }
-            <form id={`todo_list_edit_form_${i}`} className="js-todo_list_edit_form" style={{ display: 'none' }} onSubmit={ (e) => {
+            ><span className={`list-element-${i}`}>{ todo_list.name }</span>
+            <form id={`todo_list_edit_form_${i}`} className="js-todo-list-edit-form" style={{ display: 'none' }} onSubmit={ (e) => {
               if (edit_input) {
                 e.preventDefault();
-                console.log(edit_input.value);
                 this.props.updateTodoList(todo_list, edit_input.value);
               }
             } }>
               <input className="text-box" type="text" ref= { node => { edit_input = node } } defaultValue={ todo_list.name }/>
-              <button type="submit" value="add">update</button>
-              <div className="cancel" data-add="cancel" onClick={ e => this.hideEditForm(e, i) }>cancel</div>
+              <div className="button-cont">
+                <button type="submit" value="add">upda)te</button>
+                <div className="cancel" data-add="cancel" onClick={ e => this.hideEditForm(e, i) }>cancel</div>
+              </div>
             </form>
             <span
             className="menu-ellipsis"
