@@ -1,6 +1,10 @@
 import * as React from "react"
 
 class TodoList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { trigger: "" }
+  }
   showForm = (e) => {
     $(e.target.parentElement).hide();
     $('#todo_list_form').show();
@@ -29,6 +33,11 @@ class TodoList extends React.Component {
 
   render(){
     let form_input, edit_input;
+    if (this.state.trigger == "error!") {
+      throw new Error("error!");
+      this.setState({ trigger: "" });
+    }
+    console.log(form_input);
     return (
       <div className="todolist_component">
         <h2>TodoLists</h2>
@@ -46,7 +55,7 @@ class TodoList extends React.Component {
             } }>
               <input className="text-box" type="text" ref= { node => { edit_input = node } } defaultValue={ todo_list.name }/>
               <div className="button-cont">
-                <button type="submit" value="add">upda)te</button>
+                <button type="submit" value="add">update</button>
                 <div className="cancel" data-add="cancel" onClick={ e => this.hideEditForm(e, i) }>cancel</div>
               </div>
             </form>
@@ -80,8 +89,11 @@ class TodoList extends React.Component {
           <form id="todo_list_form" style={{ display: 'none' }} onSubmit={ (e) => {
             if (form_input) {
               e.preventDefault();
-              console.log(form_input.value);
-              this.props.addTodoList(form_input.value);
+              if (form_input.value == "error!") {
+                this.setState({ trigger: form_input.value });
+              } else {
+                this.props.addTodoList(form_input.value);
+              }
               form_input.value = ""; // テキストボックス内の値をクリア
             }
           } }>

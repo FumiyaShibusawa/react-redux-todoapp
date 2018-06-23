@@ -1,6 +1,5 @@
 import * as React from "react"
 import { connect } from "react-redux"
-import Navigation from "../components/Navigation"
 import TodoList from "../components/TodoList"
 import Todo from "../components/Todo"
 import { addTodoList, updateTodoList, fetchTodoLists, deleteTodoList } from "../actions/TodoListActions"
@@ -36,6 +35,36 @@ const mapDispatchToProps = dispatch => ({
     dispatch(showTodos(todo_list));
   }
 })
+// Error Boundaries only for demo
+class DemoErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { error: null, errorInfo: null };
+  }
+
+  componentDidCatch = (error, errorInfo)  => {
+    this.setState({ error: error, errorInfo: errorInfo });
+  }
+
+  render() {
+    if (this.state.error) {
+      return (
+        <div className="todolist_component">
+          <p>Something went wrong.</p>
+          <details style={{ whiteSpace: "pre-wrap" }} >
+            { this.state.error && this.state.error.toString() }
+            <br/>
+            { this.state.errorInfo.componentStack }
+          </details>
+          <button type="button" onClick={ () =>
+            this.setState({ error: null, errorInfo: null })
+          }>close error messages</button>
+        </div>
+      )
+    }
+    return this.props.children;
+  }
+}
 
 class TodoListContainer extends React.Component {
   constructor(props) {
@@ -52,9 +81,9 @@ class TodoListContainer extends React.Component {
   }
   render() {
     return (
-      <div>
-        <main>
-          <div className="todolist_container">
+      <main>
+        <div className="todolist_container">
+          <DemoErrorBoundary>
             <TodoList
             todo_lists={ this.props.todo_lists }
             addTodoList={ this.props.addTodoList }
@@ -62,16 +91,16 @@ class TodoListContainer extends React.Component {
             showTodos={ this.showTodos }
             deleteTodoList={ this.props.deleteTodoList }
             />
-            <Todo
-            todo_list={ this.props.todo_lists[this.state.todo_list_idx] }
-            addTodo={ this.props.addTodo }
-            deleteTodo={ this.props.deleteTodo }
-            completeTodo={ this.props.completeTodo }
-            num={ this.state.todo_list_idx }
-            />
-          </div>
-        </main>
-      </div>
+          </DemoErrorBoundary>
+          <Todo
+          todo_list={ this.props.todo_lists[this.state.todo_list_idx] }
+          addTodo={ this.props.addTodo }
+          deleteTodo={ this.props.deleteTodo }
+          completeTodo={ this.props.completeTodo }
+          num={ this.state.todo_list_idx }
+          />
+        </div>
+      </main>
     )
   }
 }
