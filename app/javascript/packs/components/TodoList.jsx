@@ -38,7 +38,6 @@ class TodoList extends React.Component {
       throw new Error("error!");
       this.setState({ trigger: "" });
     }
-    console.log(form_input);
     return (
       <div className="todolist_component">
         <h2>TodoLists</h2>
