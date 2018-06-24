@@ -33,11 +33,11 @@ class TodoList extends React.Component {
 
   render(){
     let form_input, edit_input;
+    // where it throws error has to be outside of return so Error Boundaries can recognize it.
     if (this.state.trigger == "error!") {
       throw new Error("error!");
       this.setState({ trigger: "" });
     }
-    console.log(form_input);
     return (
       <div className="todolist_component">
         <h2>TodoLists</h2>
