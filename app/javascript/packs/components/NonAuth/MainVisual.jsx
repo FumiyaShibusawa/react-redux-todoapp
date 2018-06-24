@@ -8,7 +8,7 @@ class MainVisual extends React.Component {
   }
   render() {
     return (
-      <div>
+      <React.Fragment>
         <div className="modal">
           <div className="modal-overlay"></div>
           <Login/>
@@ -52,7 +52,7 @@ class MainVisual extends React.Component {
             </a>
           </section>
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 }
