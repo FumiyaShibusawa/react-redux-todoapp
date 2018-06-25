@@ -27,6 +27,11 @@ const todolists = (state = [], action) => {
     case "ADD_TODO_FAILED":
       return state
 
+    case "UPDATE_TODO":
+      return action.todo
+    case "UPDATE_TODO_FAILED":
+      return state
+
     case "DELETE_TODO":
       return action.todo
     case "DELETE_TODO_FAILED":

@@ -11,7 +11,7 @@ class TodosController < ApplicationController
   end
 
   def update
-    todo = Todo.find(params[:id])
+    todo = TodoList.where(user_id: current_user.id).find(todo_params[:todo_list_id]).todos.find(params[:id])
     if todo.update(todo_params)
       todo_data = TodoList.where(user_id: current_user.id).to_json(include: :todos)
       respond_to do |format|
@@ -22,7 +22,7 @@ class TodosController < ApplicationController
   end
 
   def destroy
-    todo = Todo.find(params[:id])
+    todo = TodoList.where(user_id: current_user.id).find(todo_params[:todo_list_id]).todos.find(params[:id])
     if todo.destroy
       todo_data = TodoList.where(user_id: current_user.id).to_json(include: :todos)
       respond_to do |format|
