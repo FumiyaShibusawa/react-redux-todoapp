@@ -46,38 +46,39 @@ class TodoList extends React.Component {
             <li
             key={ `${todo_list.name}_${todo_list._id["$oid"]}` }
             onClick={ () => { this.props.showTodos(i) } }
-            ><span className={`list-element-${i}`}>{ todo_list.name }</span>
-            <form id={`todo_list_edit_form_${i}`} className="js-todo-list-edit-form" style={{ display: 'none' }} onSubmit={ (e) => {
-              if (edit_input) {
-                e.preventDefault();
-                this.props.updateTodoList(todo_list, edit_input.value);
-              }
-            } }>
-              <input className="text-box" type="text" ref= { node => { edit_input = node } } defaultValue={ todo_list.name }/>
-              <div className="button-cont">
-                <button type="submit" value="add">update</button>
-                <div className="cancel" data-add="cancel" onClick={ e => this.hideEditForm(e, i) }>cancel</div>
+            >
+              <span className={`list-element-${i}`}>{ todo_list.name }</span>
+              <form id={`todo_list_edit_form_${i}`} className="js-todo-list-edit-form" style={{ display: 'none' }} onSubmit={ (e) => {
+                if (edit_input) {
+                  e.preventDefault();
+                  this.props.updateTodoList(todo_list, edit_input.value);
+                }
+              } }>
+                <input className="text-box" type="text" ref= { node => { edit_input = node } } defaultValue={ todo_list.name }/>
+                <div className="button-cont">
+                  <button type="submit" value="add">update</button>
+                  <div className="cancel" data-add="cancel" onClick={ e => this.hideEditForm(e, i) }>cancel</div>
+                </div>
+              </form>
+              <span
+              className="menu-ellipsis"
+              key={ `${todo_list.name}_${todo_list._id["$oid"]}` }
+              onClick={ e => {
+                e.stopPropagation();
+                this.toggleTodoListMenu(e, i);
+              } }>︙</span>
+              <div id={`todolist-menu_${i}`} className="js-todolist-menu" style={{ display: 'none' }}>
+                <ul>
+                  <li onClick={ e => {
+                    e.stopPropagation();
+                    this.showEditForm(e, i);
+                  } }>edit</li>
+                  <li onClick={ e => {
+                    e.stopPropagation();
+                    this.props.deleteTodoList(todo_list);
+                  } }>delete</li>
+                </ul>
               </div>
-            </form>
-            <span
-            className="menu-ellipsis"
-            key={ `${todo_list.name}_${todo_list._id["$oid"]}` }
-            onClick={ e => {
-              e.stopPropagation();
-              this.toggleTodoListMenu(e, i);
-            } }>︙</span>
-            <div id={`todolist-menu_${i}`} className="js-todolist-menu" style={{ display: 'none' }}>
-              <ul>
-                <li onClick={ e => {
-                  e.stopPropagation();
-                  this.showEditForm(e, i);
-                } }>edit</li>
-                <li onClick={ e => {
-                  e.stopPropagation();
-                  this.props.deleteTodoList(todo_list);
-                } }>delete</li>
-              </ul>
-            </div>
             </li>
           ) ) }
         </ul>

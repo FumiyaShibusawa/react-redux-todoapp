@@ -14,7 +14,7 @@ class DemoErrorBoundary extends React.Component {
   render() {
     if (this.state.error) {
       return (
-        <div className="login-form">
+        <div className="signup-form">
           <p>Something went wrong.</p>
           <details style={{ whiteSpace: "pre-wrap" }} >
             { this.state.error && this.state.error.toString() }
@@ -41,7 +41,7 @@ class Signup extends React.Component {
     }
   }
   render() {
-    // where it throws error has to be outside of return so Error Boundaries can recognize it. 
+    // where it throws error has to be outside of return so Error Boundaries can recognize it.
     if (this.state.trigger == "error!") {
       throw new Error("error!");
       this.setState({ trigger: "" });

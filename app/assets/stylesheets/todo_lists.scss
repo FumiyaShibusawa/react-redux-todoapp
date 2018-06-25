@@ -58,7 +58,7 @@
         }
       }
     }
-    .js-todolist-menu {
+    .js-todolist-menu, .js-todo-menu {
       position: absolute;
       background-color: #fff;
       right: 0;
@@ -72,6 +72,7 @@
       ul li {
         border: none !important;
         padding: 10px !important;
+        cursor: pointer;
       }
     }
     #todo_list_form, #todo_form, .js-todo-list-edit-form, .js-todo-edit-form {
@@ -105,7 +106,7 @@
         }
         .cancel {
           display: inline-block;
-          padding: 10px 15px;
+          padding: 4px 15px;
         }
       }
     }
