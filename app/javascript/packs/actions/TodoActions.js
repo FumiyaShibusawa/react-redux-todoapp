@@ -71,11 +71,12 @@ export const showTodos = (todo_list) => ({
 })
 
 
-export const deleteTodo = (todo) => {
+export const deleteTodo = (todo, todo_list_id) => {
   const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
   return dispatch => {
     fetch(`/todos/${todo._id["$oid"]}.json`, {
       method: "DELETE",
+      body: JSON.stringify({ todo: { todo_list_id: todo_list_id } }),
       headers: new Headers({
         "Content-Type": "application/json",
         "Authentication": `Bearer ${jwtToken}`
@@ -89,21 +90,23 @@ export const deleteTodo = (todo) => {
   }
 }
 
-const deleteTodoSuccess = (todo) => ({
+const deleteTodoSuccess = (todo, todo_list_id) => ({
   type: "DELETE_TODO",
+  todo_list_id: todo_list_id,
   todo: todo
 })
-const deleteTodoFailed = (todo) => ({
+const deleteTodoFailed = (todo, todo_list_id) => ({
   type: "DELETE_TODO_FAILED",
+  todo_list_id: todo_list_id,
   todo: todo
 })
 
-export const completeTodo = (todo) => {
+export const completeTodo = (todo, todo_list_id) => {
   const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
   return dispatch => {
     fetch(`/todos/${todo._id["$oid"]}.json`, {
       method: "PATCH",
-      body: JSON.stringify({ todo: { completed: !todo.completed } }),
+      body: JSON.stringify({ todo: { completed: !todo.completed, todo_list_id: todo_list_id } }),
       headers: new Headers({
         "Content-Type": "application/json",
         "Authentication": `Bearer ${jwtToken}`
@@ -117,11 +120,13 @@ export const completeTodo = (todo) => {
   }
 }
 
-const completeTodoSuccess = (todo) => ({
+const completeTodoSuccess = (todo, todo_list_id) => ({
   type: "COMPLETE_TODO",
+  todo_list_id: todo_list_id,
   todo: todo
 })
-const completeTodoFailed = (todo) => ({
+const completeTodoFailed = (todo, todo_list_id) => ({
   type: "COMPLETE_TODO_FAILED",
+  todo_list_id: todo_list_id,
   todo: todo
 })
