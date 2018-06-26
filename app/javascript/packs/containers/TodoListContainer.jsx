@@ -28,11 +28,11 @@ const mapDispatchToProps = dispatch => ({
   updateTodo: (todo, value, todo_list_id, index) => {
     dispatch(updateTodo(todo, value, todo_list_id, index));
   },
-  deleteTodo: (todo) => {
-    dispatch(deleteTodo(todo));
+  deleteTodo: (todo, todo_list_id) => {
+    dispatch(deleteTodo(todo, todo_list_id));
   },
-  completeTodo: (todo) => {
-    dispatch(completeTodo(todo));
+  completeTodo: (todo, todo_list_id) => {
+    dispatch(completeTodo(todo, todo_list_id));
   },
   showTodos: (todo_list) => {
     dispatch(showTodos(todo_list));
@@ -83,24 +83,34 @@ class TodoListContainer extends React.Component {
     this.setState({ todo_list_idx: index })
   }
   render() {
+    const {
+      todo_lists,
+      addTodoList,
+      updateTodoList,
+      deleteTodoList,
+      addTodo,
+      updateTodo,
+      deleteTodo,
+      completeTodo,
+    } = this.props;
     return (
       <main>
         <div className="todolist_container">
           <DemoErrorBoundary>
             <TodoList
-              todo_lists={this.props.todo_lists}
-              addTodoList={this.props.addTodoList}
-              updateTodoList={this.props.updateTodoList}
+              todo_lists={todo_lists}
+              addTodoList={addTodoList}
+              updateTodoList={updateTodoList}
               showTodos={this.showTodos}
-              deleteTodoList={this.props.deleteTodoList}
+              deleteTodoList={deleteTodoList}
             />
           </DemoErrorBoundary>
           <Todo
-            todo_list={this.props.todo_lists[this.state.todo_list_idx]}
-            addTodo={this.props.addTodo}
-            updateTodo={this.props.updateTodo}
-            deleteTodo={this.props.deleteTodo}
-            completeTodo={this.props.completeTodo}
+            todo_list={todo_lists[this.state.todo_list_idx]}
+            addTodo={addTodo}
+            updateTodo={updateTodo}
+            deleteTodo={deleteTodo}
+            completeTodo={completeTodo}
             num={this.state.todo_list_idx}
           />
         </div>

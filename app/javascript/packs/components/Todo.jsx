@@ -46,7 +46,7 @@ class Todo extends React.Component {
                               className={`completed ${todo.completed}`}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                this.props.completeTodo(todo);
+                                this.props.completeTodo(todo, this.props.todo_list._id["$oid"]);
                               }}
                             ></span>
                             {todo.name}
@@ -78,7 +78,7 @@ class Todo extends React.Component {
                               }}>edit</li>
                               <li onClick={e => {
                                 e.stopPropagation();
-                                this.props.deleteTodo(todo);
+                                this.props.deleteTodo(todo, this.props.todo_list._id["$oid"]);
                               }}>delete</li>
                             </ul>
                           </div>
