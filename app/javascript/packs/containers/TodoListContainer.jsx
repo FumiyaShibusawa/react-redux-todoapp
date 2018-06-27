@@ -1,43 +1,21 @@
 import * as React from "react"
 import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
 import TodoList from "../components/TodoList"
 import Todo from "../components/Todo"
-import { addTodoList, updateTodoList, fetchTodoLists, deleteTodoList } from "../actions/TodoListActions"
-import { addTodo, showTodos, updateTodo, deleteTodo, completeTodo } from "../actions/TodoActions"
+import * as TodoListActions from "../actions/TodoListActions"
+import * as TodoActions from "../actions/TodoActions"
 
 const mapStateToProps = state => ({
   todo_lists: state.todolists
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchTodoLists: () => {
-    dispatch(fetchTodoLists());
-  },
-  addTodoList: (todo_list) => {
-    dispatch(addTodoList(todo_list));
-  },
-  updateTodoList: (todo_list, value) => {
-    dispatch(updateTodoList(todo_list, value));
-  },
-  deleteTodoList: (todo_list) => {
-    dispatch(deleteTodoList(todo_list));
-  },
-  addTodo: (value, todo_list_id, index) => {
-    dispatch(addTodo(value, todo_list_id, index));
-  },
-  updateTodo: (todo, value, todo_list_id, index) => {
-    dispatch(updateTodo(todo, value, todo_list_id, index));
-  },
-  deleteTodo: (todo, todo_list_id) => {
-    dispatch(deleteTodo(todo, todo_list_id));
-  },
-  completeTodo: (todo, todo_list_id) => {
-    dispatch(completeTodo(todo, todo_list_id));
-  },
-  showTodos: (todo_list) => {
-    dispatch(showTodos(todo_list));
-  }
-})
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    ...TodoListActions,
+    ...TodoActions
+  }, dispatch)
+);
 // Error Boundaries only for demo
 class DemoErrorBoundary extends React.Component {
   constructor(props) {
