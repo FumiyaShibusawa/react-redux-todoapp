@@ -1,14 +1,42 @@
 import * as React from "react"
 
-class Todo extends React.Component {
-  showForm = (e) => {
-    $(e.target.parentElement).hide();
-    $('#todo_form').show();
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
   }
   hideForm = (e) => {
     e.preventDefault();
     $('#todo_form').hide();
     $('[data-add="show-todo"]').show();
+  }
+  render() {
+    let form_input;
+    return (
+      <form id="todo_form" style={{ display: 'none' }} onSubmit={(e) => {
+        if (form_input) {
+          e.preventDefault();
+          if (this.props.action == "add") {
+            this.props.addTodo(form_input.value, this.props.todo_list._id["$oid"], this.props.num);
+          } else if (this.props.action == "update") {
+            this.props.updateTodo(this.props.todo, form_input.value, this.props.todo_list._id["$oid"], this.props.num);
+          }
+          form_input.value = ""; // テキストボックス内の値をクリア
+        }
+      }}>
+        <input className="text-box" type="text" ref={node => { form_input = node }} />
+        <div className="button-cont">
+          <button type="submit" value="add">{this.props.action}</button>
+          <div className="cancel" data-add="cancel" onClick={this.hideForm}>cancel</div>
+        </div>
+      </form>
+    )
+  }
+}
+
+class Todo extends React.Component {
+  showForm = (e) => {
+    $(e.target.parentElement).hide();
+    $('#todo_form').show();
   }
   showEditForm = (e, i) => {
     e.preventDefault();
@@ -28,7 +56,7 @@ class Todo extends React.Component {
   }
 
   render() {
-    let form_input, edit_input;
+    let edit_input;
     return (
       <div className="todo_component">
         {(() => {
@@ -92,19 +120,11 @@ class Todo extends React.Component {
                     <div className="plus">+</div>
                     <span className="add-button-text" onClick={this.showForm}>add new todo</span>
                   </div>
-                  <form id="todo_form" style={{ display: 'none' }} onSubmit={(e) => {
-                    if (form_input) {
-                      e.preventDefault();
-                      this.props.addTodo(form_input.value, this.props.todo_list._id["$oid"], this.props.num);
-                      form_input.value = ""; // テキストボックス内の値をクリア
-                    }
-                  }}>
-                    <input className="text-box" type="text" ref={node => { form_input = node }} />
-                    <div className="button-cont">
-                      <button type="submit" value="add">add</button>
-                      <div className="cancel" data-add="cancel" onClick={this.hideForm}>cancel</div>
-                    </div>
-                  </form>
+                  <Form
+                    action={"add"}
+                    addTodo={this.props.addTodo}
+                    todo_list={this.props.todo_list}
+                  />
                 </div>
               </div>
             )
