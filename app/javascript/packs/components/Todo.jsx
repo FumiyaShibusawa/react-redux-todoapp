@@ -4,29 +4,26 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
   }
-  hideForm = (e) => {
-    e.preventDefault();
-    $('#todo_form').hide();
-    $('[data-add="show-todo"]').show();
-  }
   render() {
     let form_input;
+    const _todo = this.props.todo, _todo_list = this.props.todo_list;
     return (
-      <form id="todo_form" style={{ display: 'none' }} onSubmit={(e) => {
+      <form className="js-todo-form" id={this.props.form_id} onSubmit={(e) => {
         if (form_input) {
           e.preventDefault();
           if (this.props.action == "add") {
-            this.props.addTodo(form_input.value, this.props.todo_list._id["$oid"], this.props.num);
+            this.props.addTodo(form_input.value, _todo_list._id["$oid"], this.props.num);
           } else if (this.props.action == "update") {
-            this.props.updateTodo(this.props.todo, form_input.value, this.props.todo_list._id["$oid"], this.props.num);
+            this.props.updateTodo(_todo, form_input.value, _todo_list._id["$oid"], this.props.num);
           }
           form_input.value = ""; // テキストボックス内の値をクリア
+          this.props.hideForm(e);
         }
       }}>
-        <input className="text-box" type="text" ref={node => { form_input = node }} />
+        <input className="text-box" type="text" ref={node => { form_input = node }} defaultValue={_todo && _todo.name} />
         <div className="button-cont">
           <button type="submit" value="add">{this.props.action}</button>
-          <div className="cancel" data-add="cancel" onClick={this.hideForm}>cancel</div>
+          <div className="cancel" data-add="cancel" onClick={this.props.hideForm}>cancel</div>
         </div>
       </form>
     )
@@ -34,21 +31,33 @@ class Form extends React.Component {
 }
 
 class Todo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFormToggled: false,
+      EditFormToggleIndex: null
+    }
+  }
   showForm = (e) => {
     $(e.target.parentElement).hide();
-    $('#todo_form').show();
+    this.setState({ isFormToggled: true });
+  }
+  hideForm = (e) => {
+    e.preventDefault();
+    $('#todo_form').hide();
+    $('[data-add="show-todo"]').show();
+    this.setState({ isFormToggled: false });
   }
   showEditForm = (e, i) => {
     e.preventDefault();
     e.persist();
+    this.setState({ EditFormToggleIndex: i });
     $(`#todo-menu_${i}`).hide();
-    $(`#todo_edit_form_${i}`).show();
     $(`.todo-element-${i}`).hide();
   }
-  hideEditForm = (e, i) => {
+  hideEditForm = (e) => {
     e.preventDefault();
-    $(`#todo_edit_form_${i}`).hide();
-    $(`.todo-element-${i}`).show();
+    this.setState({ EditFormToggleIndex: null });
   }
   toggleTodoMenu = (e, i) => {
     $(`:not(#todo-menu_${i}).js-todo-menu`).hide();
@@ -56,7 +65,7 @@ class Todo extends React.Component {
   }
 
   render() {
-    let edit_input;
+    console.log(this.state)
     return (
       <div className="todo_component">
         {(() => {
@@ -69,28 +78,25 @@ class Todo extends React.Component {
                     if (this.props.todo_list.todos) {
                       return this.props.todo_list.todos.map((todo, i) => (
                         <li key={`${todo.name}_${i}`}>
-                          <span className={`todo-element-${i}`}>
-                            <span
-                              className={`completed ${todo.completed}`}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                this.props.completeTodo(todo, this.props.todo_list._id["$oid"]);
-                              }}
-                            ></span>
-                            {todo.name}
-                          </span>
-                          <form id={`todo_edit_form_${i}`} className="js-todo-edit-form" style={{ display: 'none' }} onSubmit={(e) => {
-                            if (edit_input) {
-                              e.preventDefault();
-                              this.props.updateTodo(todo, edit_input.value, this.props.todo_list._id["$oid"], this.props.num);
-                            }
-                          }}>
-                            <input className="text-box" type="text" ref={node => { edit_input = node }} defaultValue={todo.name} />
-                            <div className="button-cont">
-                              <button type="submit" value="add">update</button>
-                              <div className="cancel" data-add="cancel" onClick={e => this.hideEditForm(e, i)}>cancel</div>
-                            </div>
-                          </form>
+                          {this.state.EditFormToggleIndex == i ?
+                            <Form
+                              action={"update"}
+                              form_id={`todo_edit_form_${i}`}
+                              updateTodo={this.props.updateTodo}
+                              todo={todo}
+                              todo_list={this.props.todo_list}
+                              hideForm={this.hideEditForm}
+                            /> :
+                            <span className={`todo-element-${i}`}>
+                              <span
+                                className={`completed ${todo.completed}`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  this.props.completeTodo(todo, this.props.todo_list._id["$oid"]);
+                                }}
+                              ></span>
+                              {todo.name}
+                            </span>}
                           <span
                             className="menu-ellipsis"
                             key={`${todo.name}_${todo._id["$oid"]}`}
@@ -120,11 +126,14 @@ class Todo extends React.Component {
                     <div className="plus">+</div>
                     <span className="add-button-text" onClick={this.showForm}>add new todo</span>
                   </div>
-                  <Form
-                    action={"add"}
-                    addTodo={this.props.addTodo}
-                    todo_list={this.props.todo_list}
-                  />
+                  {this.state.isFormToggled ?
+                    <Form
+                      action={"add"}
+                      addTodo={this.props.addTodo}
+                      todo_list={this.props.todo_list}
+                      form_id={"todo_form"}
+                      hideForm={this.hideForm}
+                    /> : null}
                 </div>
               </div>
             )

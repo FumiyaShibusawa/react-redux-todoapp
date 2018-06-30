@@ -7,7 +7,7 @@ class DemoErrorBoundary extends React.Component {
     this.state = { error: null, errorInfo: null };
   }
 
-  componentDidCatch = (error, errorInfo)  => {
+  componentDidCatch = (error, errorInfo) => {
     this.setState({ error: error, errorInfo: errorInfo });
   }
 
@@ -17,11 +17,11 @@ class DemoErrorBoundary extends React.Component {
         <div className="signup-form">
           <p>Something went wrong.</p>
           <details style={{ whiteSpace: "pre-wrap" }} >
-            { this.state.error && this.state.error.toString() }
-            <br/>
-            { this.state.errorInfo.componentStack }
+            {this.state.error && this.state.error.toString()}
+            <br />
+            {this.state.errorInfo.componentStack}
           </details>
-          <button type="button" onClick={ () =>
+          <button type="button" onClick={() =>
             this.setState({ error: null, errorInfo: null })
           }>close error messages</button>
         </div>
@@ -46,16 +46,16 @@ class Signup extends React.Component {
       throw new Error("error!");
       this.setState({ trigger: "" });
     }
-    return(
+    return (
       <div className="signup-form">
         <h1>Register</h1>
         <form action="/users" method="POST" charSet="UTF-8">
-          <input name="authenticity_token" type="hidden"/>
-          <input name="user[name]" type="text" placeholder="Enter your name" autoComplete="username" onChange={ e => {
+          <input name="authenticity_token" type="hidden" />
+          <input name="user[name]" type="text" placeholder="Enter your name" autoComplete="username" onChange={e => {
             this.setState({ trigger: e.target.value });
-          }}/>
-          <input name="user[email]" type="text" placeholder="Enter your email" autoComplete="email"/>
-          <input name="user[password]" type="password" placeholder="Enter your password" autoComplete="current-password"/>
+          }} />
+          <input name="user[email]" type="text" placeholder="Enter your email" autoComplete="email" />
+          <input name="user[password]" type="password" placeholder="Enter your password" autoComplete="current-password" />
           <button type="submit">Register</button>
         </form>
         <div className="goto-login" data-modal="popup">Already have your account?</div>
@@ -65,9 +65,9 @@ class Signup extends React.Component {
 }
 
 function SignupWithErrorBoundary() {
-  return(
+  return (
     <DemoErrorBoundary>
-      <Signup/>
+      <Signup />
     </DemoErrorBoundary>
   )
 }
