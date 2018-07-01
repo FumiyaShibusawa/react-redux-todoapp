@@ -1,5 +1,35 @@
 import * as React from "react"
 
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    let form_input;
+    const _todo = this.props.todo, _todo_list = this.props.todo_list;
+    return (
+      <form className="js-todo-form" id={this.props.form_id} onSubmit={(e) => {
+        if (form_input) {
+          e.preventDefault();
+          if (this.props.action == "add") {
+            this.props.addTodo(form_input.value, _todo_list._id["$oid"], this.props.num);
+          } else if (this.props.action == "update") {
+            this.props.updateTodo(_todo, form_input.value, _todo_list._id["$oid"], this.props.num);
+          }
+          form_input.value = ""; // テキストボックス内の値をクリア
+          this.props.hideForm(e);
+        }
+      }}>
+        <input className="text-box" type="text" ref={node => { form_input = node }} defaultValue={_todo && _todo.name} />
+        <div className="button-cont">
+          <button type="submit" value="add">{this.props.action}</button>
+          <div className="cancel" data-add="cancel" onClick={this.props.hideForm}>cancel</div>
+        </div>
+      </form>
+    )
+  }
+}
+
 class TodoList extends React.Component {
   constructor(props) {
     super(props);
