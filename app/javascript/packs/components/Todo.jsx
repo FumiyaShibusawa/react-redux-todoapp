@@ -20,7 +20,11 @@ class Form extends React.Component {
           this.props.hideForm(e);
         }
       }}>
-        <input className="text-box" type="text" ref={node => { form_input = node }} defaultValue={_todo && _todo.name} />
+        <input
+          className="text-box"
+          type="text"
+          ref={node => { form_input = node }}
+          defaultValue={_todo && _todo.name} />
         <div className="button-cont">
           <button type="submit" value="add">{this.props.action}</button>
           <div className="cancel" data-add="cancel" onClick={this.props.hideForm}>cancel</div>
@@ -44,7 +48,6 @@ class Todo extends React.Component {
   }
   hideForm = (e) => {
     e.preventDefault();
-    $('#todo_form').hide();
     $('[data-add="show-todo"]').show();
     this.setState({ isFormToggled: false });
   }
@@ -65,7 +68,6 @@ class Todo extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="todo_component">
         {(() => {
@@ -87,23 +89,26 @@ class Todo extends React.Component {
                               todo_list={this.props.todo_list}
                               hideForm={this.hideEditForm}
                             /> :
-                            <span className={`todo-element-${i}`}>
+                            <React.Fragment>
+                              <span className={`todo-element-${i}`}>
+                                <span
+                                  className={`completed ${todo.completed}`}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    this.props.completeTodo(todo, this.props.todo_list._id["$oid"]);
+                                  }}
+                                ></span>
+                                {todo.name}
+                              </span>
                               <span
-                                className={`completed ${todo.completed}`}
+                                className="menu-ellipsis"
+                                key={`${todo.name}_${todo._id["$oid"]}`}
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  this.props.completeTodo(todo, this.props.todo_list._id["$oid"]);
-                                }}
-                              ></span>
-                              {todo.name}
-                            </span>}
-                          <span
-                            className="menu-ellipsis"
-                            key={`${todo.name}_${todo._id["$oid"]}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              this.toggleTodoMenu(e, i);
-                            }}>︙</span>
+                                  this.toggleTodoMenu(e, i);
+                                }}>︙</span>
+                            </React.Fragment>
+                          }
                           <div id={`todo-menu_${i}`} className="js-todo-menu" style={{ display: 'none' }}>
                             <ul>
                               <li onClick={e => {
