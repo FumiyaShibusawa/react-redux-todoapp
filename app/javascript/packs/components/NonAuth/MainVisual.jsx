@@ -11,7 +11,7 @@ class MainVisual extends React.Component {
       <React.Fragment>
         <div className="modal">
           <div className="modal-overlay"></div>
-          <Login/>
+          <Login />
         </div>
         <div className="main-visual">
           <div className="inner">
@@ -19,7 +19,7 @@ class MainVisual extends React.Component {
               <h2>Simple Todo App</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
             </div>
-            <SignupWithErrorBoundary/>
+            <SignupWithErrorBoundary />
           </div>
         </div>
         <div className="features">
@@ -28,18 +28,18 @@ class MainVisual extends React.Component {
             <div className="features-grid">
               <section>
                 <h3>React</h3>
-                <img src="assets/react.svg"/>
+                <img src="assets/react.svg" />
                 <p>UI view built solely with React components.</p>
               </section>
               <section>
                 <h3>Redux</h3>
-                <img src="assets/redux.svg"/>
-                <p>UI view built solely with React components.</p>
+                <img src="assets/redux.svg" />
+                <p>State management for todolists with Redux.</p>
               </section>
               <section>
                 <h3>JWT</h3>
-                <img src="assets/jwt.svg"/>
-                <p>UI view built solely with React components.</p>
+                <img src="assets/jwt.svg" />
+                <p>Token-based Authentication on asynchronous requests.</p>
               </section>
             </div>
           </div>
