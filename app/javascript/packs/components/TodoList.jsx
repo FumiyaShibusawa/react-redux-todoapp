@@ -3,12 +3,20 @@ import * as React from "react"
 class Form extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      trigger: ""
+    }
   }
   render() {
     let form_input;
     const _todo_list = this.props.todo_list;
+    // where it throws error has to be outside of return so Error Boundaries can recognize it.
+    if (this.state.trigger == "error!") {
+      throw new Error("error!");
+      this.setState({ trigger: "" });
+    }
     return (
-      <form className="js-todo-list-form" id={this.props.form_id} onSubmit={(e) => {
+      <form className="js-todo-list-form" onSubmit={(e) => {
         if (form_input) {
           e.preventDefault();
           if (form_input.value == "error!") {
@@ -19,17 +27,21 @@ class Form extends React.Component {
             this.props.updateTodoList(_todo_list, form_input.value);
           }
           form_input.value = ""; // テキストボックス内の値をクリア
-          this.props.hideForm(e);
+          this.props.hideForm();
         }
       }}>
         <input
           className="text-box"
           type="text"
           ref={node => { form_input = node }}
-          defaultValue={_todo_list && _todo_list.name} />
+          defaultValue={_todo_list && _todo_list.name}
+          onChange={e => this.setState({ trigger: e.target.value })} />
         <div className="button-cont">
           <button type="submit" value="add">{this.props.action}</button>
-          <div className="cancel" data-add="cancel" onClick={this.props.hideForm}>cancel</div>
+          <div className="cancel" data-add="cancel" onClick={e => {
+            e.stopPropagation();
+            this.props.hideForm();
+          }}>cancel</div>
         </div>
       </form>
     )
@@ -40,44 +52,31 @@ class TodoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      trigger: "",
       isFormToggled: false,
-      EditFormToggleIndex: null
+      editFormIndex: null,
+      todolistMenuIndex: null
     }
   }
-  showForm = (e) => {
-    $(e.target.parentElement).hide();
-    this.setState({ isFormToggled: true });
+  toggleForm = () => {
+    this.setState({ isFormToggled: !this.state.isFormToggled });
   }
-  hideForm = (e) => {
-    e.preventDefault();
-    $('[data-add="show-todolist"]').show();
-    this.setState({ isFormToggled: false });
+  showEditForm = (i) => {
+    this.setState({ editFormIndex: i || null, todolistMenuIndex: null });
   }
-  showEditForm = (e, i) => {
-    e.preventDefault();
-    e.persist();
-    this.setState({ EditFormToggleIndex: i });
-    $(`#todolist-menu_${i}`).hide();
-    $(`#todo_list_edit_form_${i}`).show();
-    $(`.list-element-${i}`).hide();
+  hideEditForm = () => {
+    this.setState({ editFormIndex: null });
   }
-  hideEditForm = (e, i) => {
-    e.preventDefault();
-    this.setState({ EditFormToggleIndex: null });
-  }
-  toggleTodoListMenu = (e, i) => {
-    $(`:not(#todolist-menu_${i}).js-todolist-menu`).hide();
-    $(`#todolist-menu_${i}`).toggle();
+  showTodoListMenu = i => {
+    this.setState({ todolistMenuIndex: i });
   }
 
   render() {
-    let form_input, edit_input;
-    // where it throws error has to be outside of return so Error Boundaries can recognize it.
-    if (this.state.trigger == "error!") {
-      throw new Error("error!");
-      this.setState({ trigger: "" });
-    }
+    $(document).on("click", (e) => {
+      const index = this.state.todolistMenuIndex;
+      if (index && !$(e.target).closest(`#todolist-menu_${index}`).length) {
+        this.setState({ todolistMenuIndex: null });
+      }
+    });
     return (
       <div className="todolist_component">
         <h2>TodoLists</h2>
@@ -87,12 +86,11 @@ class TodoList extends React.Component {
               key={`${todo_list.name}_${todo_list._id["$oid"]}`}
               onClick={() => { this.props.showTodos(i) }}
             >
-              {this.state.EditFormToggleIndex == i ?
+              {this.state.editFormIndex == i ?
                 <Form
                   action={"update"}
                   updateTodoList={this.props.updateTodoList}
                   todo_list={todo_list}
-                  form_id={`todo_list_edit_form_${i}`}
                   hideForm={this.hideEditForm}
                 /> :
                 <React.Fragment>
@@ -102,38 +100,40 @@ class TodoList extends React.Component {
                     key={`${todo_list.name}_${todo_list._id["$oid"]}`}
                     onClick={e => {
                       e.stopPropagation();
-                      this.toggleTodoListMenu(e, i);
+                      this.showTodoListMenu(i);
                     }}>︙</span>
+                  {this.state.todolistMenuIndex == i ?
+                    <div id={`todolist-menu_${i}`} className="js-todolist-menu">
+                      <ul>
+                        <li onClick={e => {
+                          e.stopPropagation();
+                          this.showEditForm(i);
+                        }}>edit</li>
+                        <li onClick={e => {
+                          e.stopPropagation();
+                          this.props.deleteTodoList(todo_list);
+                        }}>delete</li>
+                      </ul>
+                    </div> : null
+                  }
                 </React.Fragment>
               }
-              <div id={`todolist-menu_${i}`} className="js-todolist-menu" style={{ display: 'none' }}>
-                <ul>
-                  <li onClick={e => {
-                    e.stopPropagation();
-                    this.showEditForm(e, i);
-                  }}>edit</li>
-                  <li onClick={e => {
-                    e.stopPropagation();
-                    this.props.deleteTodoList(todo_list);
-                  }}>delete</li>
-                </ul>
-              </div>
             </li>
           ))}
         </ul>
         <div className="add-button">
-          <div data-add="show-todolist">
-            <div className="plus">+</div>
-            <span className="add-button-text" onClick={this.showForm}>add new todolist</span>
-          </div>
           {this.state.isFormToggled ?
             <Form
               action={"add"}
               addTodoList={this.props.addTodoList}
               todo_list={this.props.todo_list}
-              form_id={"todo_list_form"}
-              hideForm={this.hideForm}
-            /> : null}
+              hideForm={this.toggleForm}
+            /> :
+            <div data-add="show-todolist">
+              <div className="plus">+</div>
+              <span className="add-button-text" onClick={this.toggleForm}>add new todolist</span>
+            </div>
+          }
         </div>
       </div>
     )
