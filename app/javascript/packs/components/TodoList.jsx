@@ -61,7 +61,7 @@ class TodoList extends React.Component {
     this.setState({ isFormToggled: !this.state.isFormToggled });
   }
   showEditForm = (i) => {
-    this.setState({ editFormIndex: i || null, todolistMenuIndex: null });
+    this.setState({ editFormIndex: i, todolistMenuIndex: null });
   }
   hideEditForm = () => {
     this.setState({ editFormIndex: null });
@@ -73,7 +73,7 @@ class TodoList extends React.Component {
   render() {
     $(document).on("click", (e) => {
       const index = this.state.todolistMenuIndex;
-      if (index && !$(e.target).closest(`#todolist-menu_${index}`).length) {
+      if (index != null && !$(e.target).closest(`#todolist-menu_${index}`).length) {
         this.setState({ todolistMenuIndex: null });
       }
     });

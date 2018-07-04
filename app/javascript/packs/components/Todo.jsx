@@ -27,7 +27,10 @@ class Form extends React.Component {
           defaultValue={_todo && _todo.name} />
         <div className="button-cont">
           <button type="submit" value="add">{this.props.action}</button>
-          <div className="cancel" data-add="cancel" onClick={this.props.hideForm}>cancel</div>
+          <div className="cancel" data-add="cancel" onClick={e => {
+            e.stopPropagation();
+            this.props.hideForm();
+          }}>cancel</div>
         </div>
       </form>
     )
@@ -39,35 +42,31 @@ class Todo extends React.Component {
     super(props);
     this.state = {
       isFormToggled: false,
-      EditFormToggleIndex: null
+      editFormIndex: null,
+      todoMenuIndex: null
     }
   }
-  showForm = (e) => {
-    $(e.target.parentElement).hide();
-    this.setState({ isFormToggled: true });
+  toggleForm = () => {
+    this.setState({ isFormToggled: !this.state.isFormToggled });
   }
-  hideForm = (e) => {
-    e.preventDefault();
-    $('[data-add="show-todo"]').show();
-    this.setState({ isFormToggled: false });
+  showEditForm = (i) => {
+    this.setState({ editFormIndex: i, todoMenuIndex: null });
   }
-  showEditForm = (e, i) => {
-    e.preventDefault();
-    e.persist();
-    this.setState({ EditFormToggleIndex: i });
-    $(`#todo-menu_${i}`).hide();
-    $(`.todo-element-${i}`).hide();
+  hideEditForm = () => {
+    this.setState({ editFormIndex: null });
   }
-  hideEditForm = (e) => {
-    e.preventDefault();
-    this.setState({ EditFormToggleIndex: null });
-  }
-  toggleTodoMenu = (e, i) => {
-    $(`:not(#todo-menu_${i}).js-todo-menu`).hide();
-    $(`#todo-menu_${i}`).toggle();
+  showTodoMenu = (i) => {
+    this.setState({ todoMenuIndex: i });
   }
 
   render() {
+    console.log(this.state);
+    $(document).on("click", (e) => {
+      const index = this.state.todoMenuIndex;
+      if (index != null && !$(e.target).closest(`#todo-menu_${index}`).length) {
+        this.setState({ todoMenuIndex: null });
+      }
+    });
     return (
       <div className="todo_component">
         {(() => {
@@ -80,7 +79,7 @@ class Todo extends React.Component {
                     if (this.props.todo_list.todos) {
                       return this.props.todo_list.todos.map((todo, i) => (
                         <li key={`${todo.name}_${i}`}>
-                          {this.state.EditFormToggleIndex == i ?
+                          {this.state.editFormIndex == i ?
                             <Form
                               action={"update"}
                               form_id={`todo_edit_form_${i}`}
@@ -105,40 +104,43 @@ class Todo extends React.Component {
                                 key={`${todo.name}_${todo._id["$oid"]}`}
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  this.toggleTodoMenu(e, i);
+                                  this.showTodoMenu(i);
                                 }}>︙</span>
+                              {this.state.todoMenuIndex == i ?
+                                <div id={`todo-menu_${i}`} className="js-todo-menu">
+                                  <ul>
+                                    <li onClick={e => {
+                                      e.stopPropagation();
+                                      this.showEditForm(i);
+                                    }}>edit</li>
+                                    <li onClick={e => {
+                                      e.stopPropagation();
+                                      this.props.deleteTodo(todo, this.props.todo_list._id["$oid"]);
+                                    }}>delete</li>
+                                  </ul>
+                                </div> : null
+                              }
                             </React.Fragment>
                           }
-                          <div id={`todo-menu_${i}`} className="js-todo-menu" style={{ display: 'none' }}>
-                            <ul>
-                              <li onClick={e => {
-                                e.stopPropagation();
-                                this.showEditForm(e, i);
-                              }}>edit</li>
-                              <li onClick={e => {
-                                e.stopPropagation();
-                                this.props.deleteTodo(todo, this.props.todo_list._id["$oid"]);
-                              }}>delete</li>
-                            </ul>
-                          </div>
                         </li>
                       ))
                     }
                   })()}
                 </ul>
                 <div className="add-button">
-                  <div data-add="show-todo">
-                    <div className="plus">+</div>
-                    <span className="add-button-text" onClick={this.showForm}>add new todo</span>
-                  </div>
                   {this.state.isFormToggled ?
                     <Form
                       action={"add"}
                       addTodo={this.props.addTodo}
                       todo_list={this.props.todo_list}
                       form_id={"todo_form"}
-                      hideForm={this.hideForm}
-                    /> : null}
+                      hideForm={this.toggleForm}
+                    /> :
+                    <div data-add="show-todo">
+                      <div className="plus">+</div>
+                      <span className="add-button-text" onClick={this.toggleForm}>add new todo</span>
+                    </div>
+                  }
                 </div>
               </div>
             )
