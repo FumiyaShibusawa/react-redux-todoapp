@@ -1,17 +1,13 @@
+import { todoListAPI } from "../API/todoListAPI";
+
 export const fetchTodoLists = () => {
-  return dispatch => {
-    const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
-    fetch("/todo_lists.json", {
-      headers: new Headers({
-        "Authentication": `Bearer ${jwtToken}`
-      })
-    })
-    .then(response => response.json())
-    .then(
-      result => (dispatch(fetchTodoListsSuccess(result))),
-      error => (dispatch(fetchTodoListsFailed(error)))
-    )
-  }
+  return todoListAPI(
+    "/todo_lists",
+    "GET",
+    null,
+    fetchTodoListsSuccess,
+    fetchTodoListsFailed
+  );
 }
 
 const fetchTodoListsSuccess = (todo_lists) => ({
@@ -24,24 +20,14 @@ const fetchTodoListsFailed = (error) => ({
 })
 
 
-
 export const addTodoList = (todo_list) => {
-  const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
-  return dispatch => {
-    fetch("/todo_lists.json", {
-      method: "POST",
-      body: JSON.stringify({ todo_list: { name: todo_list } }),
-      headers: new Headers({
-        "Content-Type": "application/json",
-        "Authentication": `Bearer ${jwtToken}`
-      })
-    })
-    .then(response => response.json())
-    .then(
-      result => (dispatch(addTodoListSuccess(result))),
-      error => (dispatch(addTodoListFailed(error)))
-    )
-  }
+  return todoListAPI(
+    "/todo_lists",
+    "POST",
+    { todo_list: { name: todo_list } },
+    addTodoListSuccess,
+    addTodoListFailed
+  );
 }
 
 const addTodoListSuccess = (todo_lists) => ({
@@ -55,22 +41,13 @@ const addTodoListFailed = (todo_lists) => ({
 
 
 export const updateTodoList = (todo_list, value) => {
-  const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
-  return dispatch => {
-    fetch(`/todo_lists/${todo_list._id["$oid"]}.json`, {
-      method: "PATCH",
-      body: JSON.stringify({ todo_list: { name: value } }),
-      headers: new Headers({
-        "Content-Type": "application/json",
-        "Authentication": `Bearer ${jwtToken}`
-      })
-    })
-    .then(response => response.json())
-    .then(
-      result => (dispatch(updateTodoListSuccess(result))),
-      error => (dispatch(updateTodoListFailed(error)))
-    )
-  }
+  return todoListAPI(
+    `/todo_lists/${todo_list._id["$oid"]}`,
+    "PATCH",
+    { todo_list: { name: value } },
+    updateTodoListSuccess,
+    updateTodoListFailed
+  );
 }
 
 const updateTodoListSuccess = (todo_lists) => ({
@@ -84,21 +61,13 @@ const updateTodoListFailed = (todo_lists) => ({
 
 
 export const deleteTodoList = (todo_list) => {
-  const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
-  return dispatch => {
-    fetch(`/todo_lists/${todo_list._id["$oid"]}.json`, {
-      method: "DELETE",
-      headers: new Headers({
-        "Content-Type": "application/json",
-        "Authentication": `Bearer ${jwtToken}`
-      })
-    })
-    .then(response => response.json())
-    .then(
-      result => (dispatch(deleteTodoListSuccess(result))),
-      error => (dispatch(deleteTodoListFailed(error)))
-    )
-  }
+  return todoListAPI(
+    `/todo_lists/${todo_list._id["$oid"]}`,
+    "DELETE",
+    null,
+    deleteTodoListSuccess,
+    deleteTodoListFailed
+  );
 }
 
 const deleteTodoListSuccess = (todo_lists) => ({
