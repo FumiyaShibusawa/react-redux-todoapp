@@ -1,4 +1,4 @@
-export const todoListAPI = (path, method, params, successAction, failAction) => {
+export const requestAPI = (path, method, params, successAction, failAction) => {
   return dispatch => {
     const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
     fetch(`${path}.json`, {
