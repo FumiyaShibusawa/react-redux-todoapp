@@ -12,9 +12,9 @@ class Form extends React.Component {
         if (form_input) {
           e.preventDefault();
           if (this.props.action == "add") {
-            this.props.addTodo(form_input.value, _todo_list._id["$oid"], this.props.num);
+            this.props.addTodo(form_input.value, _todo_list._id["$oid"]);
           } else if (this.props.action == "update") {
-            this.props.updateTodo(_todo, form_input.value, _todo_list._id["$oid"], this.props.num);
+            this.props.updateTodo(_todo, form_input.value, _todo_list._id["$oid"]);
           }
           form_input.value = ""; // テキストボックス内の値をクリア
           this.props.hideForm(e);
@@ -60,7 +60,6 @@ class Todo extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     $(document).on("click", (e) => {
       const index = this.state.todoMenuIndex;
       if (index != null && !$(e.target).closest(`#todo-menu_${index}`).length) {

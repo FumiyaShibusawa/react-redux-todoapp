@@ -1,66 +1,42 @@
-export const addTodo = (value, todo_list_id, index) => {
-  const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
-  return dispatch => {
-    fetch("/todos.json", {
-      method: "POST",
-      body: JSON.stringify({ todo: { name: value, todo_list_id: todo_list_id } }),
-      headers: new Headers({
-        "Content-Type": "application/json",
-        "Authentication": `Bearer ${jwtToken}`
-      })
-    })
-      .then(response => response.json())
-      .then(
-        result => (dispatch(addTodoSuccess(result, todo_list_id, index))),
-        error => (dispatch(addTodoFailed(error, todo_list_id, index)))
-      )
-  }
+import { requestAPI } from "../API/requestAPI";
+
+export const addTodo = (value, todo_list_id) => {
+  return requestAPI(
+    "/todos",
+    "POST",
+    { todo: { name: value, todo_list_id: todo_list_id } },
+    addTodoSuccess,
+    addTodoFailed
+  );
 }
 
-const addTodoSuccess = (value, todo_list_id, index) => ({
+const addTodoSuccess = (todos) => ({
   type: "ADD_TODO",
-  todo: value,
-  todo_list_id: todo_list_id,
-  index: index
+  todos: todos
 })
-const addTodoFailed = (value, todo_list_id, index) => ({
+const addTodoFailed = (todos) => ({
   type: "ADD_TODO_FAILED",
-  todo: value,
-  todo_list_id: todo_list_id,
-  index: index
+  todos: todos
 })
 
 
-export const updateTodo = (todo, value, todo_list_id, index) => {
-  const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
-  return dispatch => {
-    fetch(`/todos/${todo._id["$oid"]}.json`, {
-      method: "PATCH",
-      body: JSON.stringify({ todo: { name: value, todo_list_id: todo_list_id } }),
-      headers: new Headers({
-        "Content-Type": "application/json",
-        "Authentication": `Bearer ${jwtToken}`
-      })
-    })
-      .then(response => response.json())
-      .then(
-        result => (dispatch(updateTodoSuccess(result, todo_list_id, index))),
-        error => (dispatch(updateTodoFailed(error, todo_list_id, index)))
-      )
-  }
+export const updateTodo = (todo, value, todo_list_id) => {
+  return requestAPI(
+    `/todos/${todo._id["$oid"]}`,
+    "PATCH",
+    { todo: { name: value, todo_list_id: todo_list_id } },
+    updateTodoSuccess,
+    updateTodoFailed
+  );
 }
 
-const updateTodoSuccess = (value, todo_list_id, index) => ({
+const updateTodoSuccess = (todos) => ({
   type: "UPDATE_TODO",
-  todo: value,
-  todo_list_id: todo_list_id,
-  index: index
+  todos: todos
 })
-const updateTodoFailed = (value, todo_list_id, index) => ({
+const updateTodoFailed = (todos) => ({
   type: "UPDATE_TODO_FAILED",
-  todo: value,
-  todo_list_id: todo_list_id,
-  index: index
+  todos: todos
 })
 
 
@@ -72,61 +48,39 @@ export const showTodos = (todo_list) => ({
 
 
 export const deleteTodo = (todo, todo_list_id) => {
-  const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
-  return dispatch => {
-    fetch(`/todos/${todo._id["$oid"]}.json`, {
-      method: "DELETE",
-      body: JSON.stringify({ todo: { todo_list_id: todo_list_id } }),
-      headers: new Headers({
-        "Content-Type": "application/json",
-        "Authentication": `Bearer ${jwtToken}`
-      })
-    })
-      .then(response => response.json())
-      .then(
-        result => (dispatch(deleteTodoSuccess(result))),
-        error => (dispatch(deleteTodoFailed(error)))
-      )
-  }
+  return requestAPI(
+    `/todos/${todo._id["$oid"]}`,
+    "DELETE",
+    { todo: { todo_list_id: todo_list_id } },
+    deleteTodoSuccess,
+    deleteTodoFailed
+  );
 }
 
-const deleteTodoSuccess = (todo, todo_list_id) => ({
+const deleteTodoSuccess = (todos) => ({
   type: "DELETE_TODO",
-  todo_list_id: todo_list_id,
-  todo: todo
+  todos: todos
 })
-const deleteTodoFailed = (todo, todo_list_id) => ({
+const deleteTodoFailed = (todos) => ({
   type: "DELETE_TODO_FAILED",
-  todo_list_id: todo_list_id,
-  todo: todo
+  todos: todos
 })
 
 export const completeTodo = (todo, todo_list_id) => {
-  const jwtToken = document.cookie.match(/jwt_token=(.*)$/g)[0]
-  return dispatch => {
-    fetch(`/todos/${todo._id["$oid"]}.json`, {
-      method: "PATCH",
-      body: JSON.stringify({ todo: { completed: !todo.completed, todo_list_id: todo_list_id } }),
-      headers: new Headers({
-        "Content-Type": "application/json",
-        "Authentication": `Bearer ${jwtToken}`
-      })
-    })
-      .then(response => response.json())
-      .then(
-        result => (dispatch(completeTodoSuccess(result))),
-        error => (dispatch(completeTodoFailed(error)))
-      )
-  }
+  return requestAPI(
+    `/todos/${todo._id["$oid"]}`,
+    "PATCH",
+    { todo: { completed: !todo.completed, todo_list_id: todo_list_id } },
+    completeTodoSuccess,
+    completeTodoFailed
+  );
 }
 
-const completeTodoSuccess = (todo, todo_list_id) => ({
+const completeTodoSuccess = (todos) => ({
   type: "COMPLETE_TODO",
-  todo_list_id: todo_list_id,
-  todo: todo
+  todos: todos
 })
-const completeTodoFailed = (todo, todo_list_id) => ({
+const completeTodoFailed = (todos) => ({
   type: "COMPLETE_TODO_FAILED",
-  todo_list_id: todo_list_id,
-  todo: todo
+  todos: todos
 })

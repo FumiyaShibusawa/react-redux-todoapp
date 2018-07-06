@@ -1,7 +1,7 @@
-import { todoListAPI } from "../API/todoListAPI";
+import { requestAPI } from "../API/requestAPI";
 
 export const fetchTodoLists = () => {
-  return todoListAPI(
+  return requestAPI(
     "/todo_lists",
     "GET",
     null,
@@ -21,7 +21,7 @@ const fetchTodoListsFailed = (error) => ({
 
 
 export const addTodoList = (todo_list) => {
-  return todoListAPI(
+  return requestAPI(
     "/todo_lists",
     "POST",
     { todo_list: { name: todo_list } },
@@ -41,7 +41,7 @@ const addTodoListFailed = (todo_lists) => ({
 
 
 export const updateTodoList = (todo_list, value) => {
-  return todoListAPI(
+  return requestAPI(
     `/todo_lists/${todo_list._id["$oid"]}`,
     "PATCH",
     { todo_list: { name: value } },
@@ -61,7 +61,7 @@ const updateTodoListFailed = (todo_lists) => ({
 
 
 export const deleteTodoList = (todo_list) => {
-  return todoListAPI(
+  return requestAPI(
     `/todo_lists/${todo_list._id["$oid"]}`,
     "DELETE",
     null,
