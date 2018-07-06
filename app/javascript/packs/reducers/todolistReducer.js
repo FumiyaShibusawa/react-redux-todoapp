@@ -23,22 +23,22 @@ const todolists = (state = [], action) => {
     case "ADD_TODO":
       // TODO: TodoListモデルをまるまる取得し直すのは燃費が悪い。
       // 一部だけ変更して新しいstateとして返却したいけどやり方がわからない。
-      return action.todo
+      return action.todos
     case "ADD_TODO_FAILED":
       return state
 
     case "UPDATE_TODO":
-      return action.todo
+      return action.todos
     case "UPDATE_TODO_FAILED":
       return state
 
     case "DELETE_TODO":
-      return action.todo
+      return action.todos
     case "DELETE_TODO_FAILED":
       return state
 
     case "COMPLETE_TODO":
-      return action.todo
+      return action.todos
     case "COMPLETE_TODO_FAILED":
       return state
 
