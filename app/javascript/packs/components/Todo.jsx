@@ -8,7 +8,7 @@ class Form extends React.Component {
     let form_input;
     const _todo = this.props.todo, _todo_list = this.props.todo_list;
     return (
-      <form className="js-todo-form" id={this.props.form_id} onSubmit={(e) => {
+      <form className="todo-form" id={this.props.form_id} onSubmit={(e) => {
         if (form_input) {
           e.preventDefault();
           if (this.props.action == "add") {
@@ -88,7 +88,7 @@ class Todo extends React.Component {
                               hideForm={this.hideEditForm}
                             /> :
                             <React.Fragment>
-                              <span className={`todo-element-${i}`}>
+                              <span className="todo-element">
                                 <span
                                   className={`completed ${todo.completed}`}
                                   onClick={(e) => {
@@ -106,7 +106,7 @@ class Todo extends React.Component {
                                   this.showTodoMenu(i);
                                 }}>︙</span>
                               {this.state.todoMenuIndex == i ?
-                                <div id={`todo-menu_${i}`} className="js-todo-menu">
+                                <div id={`todo-menu_${i}`} className="todo-menu">
                                   <ul>
                                     <li onClick={e => {
                                       e.stopPropagation();
@@ -115,6 +115,7 @@ class Todo extends React.Component {
                                     <li onClick={e => {
                                       e.stopPropagation();
                                       this.props.deleteTodo(todo, this.props.todo_list._id["$oid"]);
+                                      this.setState({ todoMenuIndex: null });
                                     }}>delete</li>
                                   </ul>
                                 </div> : null

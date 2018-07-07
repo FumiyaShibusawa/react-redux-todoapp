@@ -49,16 +49,17 @@
       .menu-ellipsis {
         position: absolute;
         right: 10px;
+        top: 50%;
+        transform: rotate(90deg) translateX(-50%);
         cursor: pointer;
         color: $utility-color;
-        transform: rotate(90deg);
         transition: color .3s ease-in-out;
         &:hover {
           color: initial;
         }
       }
     }
-    .js-todolist-menu, .js-todo-menu {
+    .todolist-menu, .todo-menu {
       position: absolute;
       background-color: #fff;
       right: 0;
@@ -75,7 +76,7 @@
         cursor: pointer;
       }
     }
-    .js-todo-list-form, .js-todo-form {
+    .todo-list-form, .todo-form {
       width: 100%;
       .text-box {
         appearance: none;
@@ -136,6 +137,7 @@
     .todolist_component {
       background-color: #fff;
       flex-basis: 285px;
+      max-width: 285px;
       padding: 30px;
       box-sizing: border-box;
       box-shadow: 0 5px 10px 0px rgba(0,0,0,0.1);
@@ -153,11 +155,17 @@
           &:hover {
             background-color: #f6f6f6;
           }
+          .list-element {
+            display: block;
+            padding: 0 35px 0 0;
+            box-sizing: border-box;
+          }
         }
       }
     }
     .todo_component {
       flex-basis: 700px;
+      max-width: 700px;
       margin-left: 15px;
       padding: 30px;
       box-sizing: border-box;
@@ -169,14 +177,16 @@
       .todos {
         margin-bottom: 30px;
         li {
-          line-height: 30px;
-          padding: 10px 0;
+          padding: 15px 0;
           border-bottom: 1px solid $utility-color;
           &:first-child {
             border-top: 1px solid $utility-color;
           }
           .completed {
-            display: inline-block;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
             width: 20px;
             height: 20px;
             border: 1px solid $utility-color;
@@ -184,7 +194,6 @@
             vertical-align: middle;
             margin-right: 10px;
             cursor: pointer;
-            position: relative;
             transition: all .2s ease-in-out;
             &.true {
               background-color: lighten($completed-color, 30%);
@@ -201,6 +210,11 @@
                 transform: translate(-50%, -50%);
               }
             }
+          }
+          .todo-element {
+            display: block;
+            padding: 0 35px;
+            box-sizing: border-box;
           }
         }
       }

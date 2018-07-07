@@ -16,7 +16,7 @@ class Form extends React.Component {
       this.setState({ trigger: "" });
     }
     return (
-      <form className="js-todo-list-form" onSubmit={(e) => {
+      <form className="todo-list-form" onSubmit={(e) => {
         if (form_input) {
           e.preventDefault();
           if (form_input.value == "error!") {
@@ -73,7 +73,7 @@ class TodoList extends React.Component {
   render() {
     $(document).on("click", (e) => {
       const index = this.state.todolistMenuIndex;
-      if (index != null && !$(e.target).closest(`#todolist-menu_${index}`).length) {
+      if (index != null && !$(e.target).closest(".todolist-menu").length) {
         this.setState({ todolistMenuIndex: null });
       }
     });
@@ -94,7 +94,7 @@ class TodoList extends React.Component {
                   hideForm={this.hideEditForm}
                 /> :
                 <React.Fragment>
-                  <span className={`list-element-${i}`}>{todo_list.name}</span>
+                  <span className="list-element">{todo_list.name}</span>
                   <span
                     className="menu-ellipsis"
                     key={`${todo_list.name}_${todo_list._id["$oid"]}`}
@@ -103,7 +103,7 @@ class TodoList extends React.Component {
                       this.showTodoListMenu(i);
                     }}>︙</span>
                   {this.state.todolistMenuIndex == i ?
-                    <div id={`todolist-menu_${i}`} className="js-todolist-menu">
+                    <div id={`todolist-menu_${i}`} className="todolist-menu">
                       <ul>
                         <li onClick={e => {
                           e.stopPropagation();
@@ -112,6 +112,8 @@ class TodoList extends React.Component {
                         <li onClick={e => {
                           e.stopPropagation();
                           this.props.deleteTodoList(todo_list);
+                          console.log("deleteTodoList fired")
+                          this.setState({ todolistMenuIndex: null });
                         }}>delete</li>
                       </ul>
                     </div> : null
@@ -135,7 +137,7 @@ class TodoList extends React.Component {
             </div>
           }
         </div>
-      </div>
+      </div >
     )
   }
 }
