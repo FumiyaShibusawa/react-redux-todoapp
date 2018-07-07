@@ -10,13 +10,13 @@ export const addTodo = (value, todo_list_id) => {
   );
 }
 
-const addTodoSuccess = (todos) => ({
+const addTodoSuccess = (todo_lists) => ({
   type: "ADD_TODO",
-  todos: todos
+  todo_lists: todo_lists
 })
-const addTodoFailed = (todos) => ({
+const addTodoFailed = (todo_lists) => ({
   type: "ADD_TODO_FAILED",
-  todos: todos
+  todo_lists: todo_lists
 })
 
 
@@ -30,13 +30,13 @@ export const updateTodo = (todo, value, todo_list_id) => {
   );
 }
 
-const updateTodoSuccess = (todos) => ({
+const updateTodoSuccess = (todo_lists) => ({
   type: "UPDATE_TODO",
-  todos: todos
+  todo_lists: todo_lists
 })
-const updateTodoFailed = (todos) => ({
+const updateTodoFailed = (todo_lists) => ({
   type: "UPDATE_TODO_FAILED",
-  todos: todos
+  todo_lists: todo_lists
 })
 
 
@@ -57,13 +57,13 @@ export const deleteTodo = (todo, todo_list_id) => {
   );
 }
 
-const deleteTodoSuccess = (todos) => ({
+const deleteTodoSuccess = (todo_lists) => ({
   type: "DELETE_TODO",
-  todos: todos
+  todo_lists: todo_lists
 })
-const deleteTodoFailed = (todos) => ({
+const deleteTodoFailed = (todo_lists) => ({
   type: "DELETE_TODO_FAILED",
-  todos: todos
+  todo_lists: todo_lists
 })
 
 export const completeTodo = (todo, todo_list_id) => {
@@ -76,11 +76,11 @@ export const completeTodo = (todo, todo_list_id) => {
   );
 }
 
-const completeTodoSuccess = (todos) => ({
+const completeTodoSuccess = (todo_lists) => ({
   type: "COMPLETE_TODO",
-  todos: todos
+  todo_lists: todo_lists
 })
-const completeTodoFailed = (todos) => ({
+const completeTodoFailed = (todo_lists) => ({
   type: "COMPLETE_TODO_FAILED",
-  todos: todos
+  todo_lists: todo_lists
 })
