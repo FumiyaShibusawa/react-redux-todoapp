@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+<div
+  className="todolist_component"
+>
+  <h2>
+    TodoLists
+  </h2>
+  <ul
+    className="todolists"
+  >
+    <li
+      onClick={[Function]}
+    >
+      <span
+        className="list-element"
+      >
+        write code everyday
+      </span>
+      <span
+        className="menu-ellipsis"
+        onClick={[Function]}
+      >
+        ︙
+      </span>
+    </li>
+  </ul>
+  <div
+    className="add-button"
+  >
+    <div
+      data-add="show-todolist"
+    >
+      <div
+        className="plus"
+      >
+        +
+      </div>
+      <span
+        className="add-button-text"
+        onClick={[Function]}
+      >
+        add new todolist
+      </span>
+    </div>
+  </div>
+</div>
+`;
