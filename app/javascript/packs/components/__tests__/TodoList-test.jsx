@@ -1,8 +1,6 @@
 import * as React from 'react';
 import TodoList from '../TodoList';
 import renderer from 'react-test-renderer';
-import $ from 'jquery';
-global.$ = global.jQuery = $;
 
 test('it renders correctly', () => {
   const todo_lists = [
