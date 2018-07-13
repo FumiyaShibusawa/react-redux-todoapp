@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+<div
+  className="signup-form"
+>
+  <h1>
+    Register
+  </h1>
+  <form
+    action="/users"
+    charSet="UTF-8"
+    method="POST"
+  >
+    <input
+      name="authenticity_token"
+      type="hidden"
+    />
+    <input
+      autoComplete="username"
+      name="user[name]"
+      onChange={[Function]}
+      placeholder="Enter your name"
+      type="text"
+    />
+    <input
+      autoComplete="email"
+      name="user[email]"
+      placeholder="Enter your email"
+      type="text"
+    />
+    <input
+      autoComplete="current-password"
+      name="user[password]"
+      placeholder="Enter your password"
+      type="password"
+    />
+    <button
+      type="submit"
+    >
+      Register
+    </button>
+  </form>
+  <div
+    className="goto-login"
+    data-modal="popup"
+  >
+    Already have your account?
+  </div>
+</div>
+`;
