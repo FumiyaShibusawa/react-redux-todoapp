@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+<div
+  className="wall-paper"
+>
+  <main
+    className="wrapper"
+  >
+    <div
+      className="modal"
+    >
+      <div
+        className="modal-overlay"
+      />
+      <div
+        className="login-form"
+      >
+        <h1>
+          Login
+        </h1>
+        <form
+          action="/sessions"
+          charSet="UTF-8"
+          method="POST"
+        >
+          <input
+            name="authenticity_token"
+            type="hidden"
+          />
+          <input
+            autoComplete="username"
+            name="session[name]"
+            placeholder="Enter your name"
+            type="text"
+          />
+          <input
+            autoComplete="email"
+            name="session[email]"
+            placeholder="Enter your email"
+            type="text"
+          />
+          <input
+            autoComplete="current-password"
+            name="session[password]"
+            placeholder="Enter your password"
+            type="password"
+          />
+          <button
+            type="submit"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+    <div
+      className="main-visual"
+    >
+      <div
+        className="inner"
+      >
+        <div
+          className="message"
+        >
+          <h2>
+            Simple Todo App
+          </h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+          </p>
+        </div>
+        <div
+          className="signup-form"
+        >
+          <h1>
+            Register
+          </h1>
+          <form
+            action="/users"
+            charSet="UTF-8"
+            method="POST"
+          >
+            <input
+              name="authenticity_token"
+              type="hidden"
+            />
+            <input
+              autoComplete="username"
+              name="user[name]"
+              onChange={[Function]}
+              placeholder="Enter your name"
+              type="text"
+            />
+            <input
+              autoComplete="email"
+              name="user[email]"
+              placeholder="Enter your email"
+              type="text"
+            />
+            <input
+              autoComplete="current-password"
+              name="user[password]"
+              placeholder="Enter your password"
+              type="password"
+            />
+            <button
+              type="submit"
+            >
+              Register
+            </button>
+          </form>
+          <div
+            className="goto-login"
+            data-modal="popup"
+          >
+            Already have your account?
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="features"
+    >
+      <div
+        className="inner"
+      >
+        <h2>
+          This sample is built with...
+        </h2>
+        <div
+          className="features-grid"
+        >
+          <section>
+            <h3>
+              React
+            </h3>
+            <img
+              src="assets/react.svg"
+            />
+            <p>
+              UI view built solely with React components.
+            </p>
+          </section>
+          <section>
+            <h3>
+              Redux
+            </h3>
+            <img
+              src="assets/redux.svg"
+            />
+            <p>
+              State management for todolists with Redux.
+            </p>
+          </section>
+          <section>
+            <h3>
+              JWT
+            </h3>
+            <img
+              src="assets/jwt.svg"
+            />
+            <p>
+              Token-based Authentication on asynchronous requests.
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div
+      className="contribute"
+    >
+      <section>
+        <h2>
+          Give a PR to improve this sample!
+        </h2>
+        <a
+          href="https://github.com/FumiyaShibusawa/react-redux-todoapp"
+          target="_blank"
+        >
+          https://github.com/FumiyaShibusawa/react-redux-todoapp
+        </a>
+      </section>
+    </div>
+  </main>
+</div>
+`;
