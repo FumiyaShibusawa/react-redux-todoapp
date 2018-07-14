@@ -1,10 +1,10 @@
 import * as React from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-import TodoList from "../components/TodoList"
-import Todo from "../components/Todo"
-import * as TodoListActions from "../actions/TodoListActions"
-import * as TodoActions from "../actions/TodoActions"
+import TodoList from "../TodoList"
+import Todo from "../Todo"
+import * as TodoListActions from "../../actions/TodoListActions"
+import * as TodoActions from "../../actions/TodoActions"
 
 const mapStateToProps = state => ({
   todo_lists: state.todolists
