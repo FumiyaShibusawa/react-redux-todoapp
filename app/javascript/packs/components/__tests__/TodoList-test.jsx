@@ -1,7 +1,8 @@
 import * as React from 'react';
 import TodoList from '../TodoList';
+import { Form } from '../TodoList';
 import renderer from 'react-test-renderer';
-import ReactTestUtils from 'react-dom/test-utils';
+import { shallow, mount, render } from 'enzyme';
 
 const todo_lists = [
   {
@@ -22,11 +23,17 @@ describe('<TodoList />', () => {
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
-  test('is a valid React Element', () => {
-    const isValidElement = ReactTestUtils.isElement(<TodoList
-      todo_lists={todo_lists}
-    />);
-    expect(isValidElement).toBe(true);
+  test('state "isFormToggled" set to true when toggleForm fired', () => {
+    const todolist = shallow(<TodoList todo_lists={todo_lists} />);
+    todolist.find('.add-button-text').simulate('click');
+    expect(todolist.state('isFormToggled')).toBe(true);
+  });
+
+  test('Form Component appears when toggleForm fired', () => {
+    const todolist = shallow(<TodoList todo_lists={todo_lists} />);
+    const form = shallow(<Form/>)
+    todolist.find('.add-button-text').simulate('click');
+    expect(todolist.containsMatchingElement(<Form/>)).toBe(true);
   });
 
 });
