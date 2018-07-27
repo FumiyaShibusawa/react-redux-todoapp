@@ -23,6 +23,8 @@ describe('<TodoList />', () => {
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  // toggleForm
   test('state "isFormToggled" set to true when toggleForm fired', () => {
     const todolist = shallow(<TodoList todo_lists={todo_lists} />);
     todolist.find('.add-button-text').simulate('click');
@@ -36,4 +38,15 @@ describe('<TodoList />', () => {
     expect(todolist.containsMatchingElement(<Form/>)).toBe(true);
   });
 
+  // showTodoListMenu
+  test('state "todolistMenuIndex" set to the index of the element when showTodoListMenu fired', () => {
+    const todolist = shallow(<TodoList todo_lists={todo_lists} />);
+    const e = todolist.find('.menu-ellipsis');
+    e.simulate('click', { stopPropagation: () => undefined });
+    expect(todolist.state('todolistMenuIndex')).toBe(0);
+  });
+
+  // showEditForm
+
+  // hideEditForm
 });
