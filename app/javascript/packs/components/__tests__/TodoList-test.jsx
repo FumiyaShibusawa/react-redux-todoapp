@@ -39,11 +39,11 @@ describe('<TodoList />', () => {
   });
 
   // showTodoListMenu
-  test('state "todolistMenuIndex" set to the index of the element when showTodoListMenu fired', () => {
+  test('todolist-menu appears when showTodoListMenu fired', () => {
     const todolist = shallow(<TodoList todo_lists={todo_lists} />);
     const e = todolist.find('.menu-ellipsis');
     e.simulate('click', { stopPropagation: () => undefined });
-    expect(todolist.state('todolistMenuIndex')).toBe(0);
+    expect(todolist.find('.todolist-menu')).toHaveLength(1);
   });
 
   // showEditForm
