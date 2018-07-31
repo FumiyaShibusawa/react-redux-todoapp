@@ -112,7 +112,6 @@ class TodoList extends React.Component {
                         <li onClick={e => {
                           e.stopPropagation();
                           this.props.deleteTodoList(todo_list);
-                          console.log("deleteTodoList fired")
                           this.setState({ todolistMenuIndex: null });
                         }}>delete</li>
                       </ul>
