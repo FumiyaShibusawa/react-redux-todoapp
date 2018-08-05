@@ -33,9 +33,8 @@ describe('<TodoList />', () => {
 
   test('Form Component appears when toggleForm fired', () => {
     const todolist = shallow(<TodoList todo_lists={todo_lists} />);
-    const form = shallow(<Form/>)
     todolist.find('.add-button-text').simulate('click');
-    expect(todolist.containsMatchingElement(<Form/>)).toBe(true);
+    expect(todolist.containsMatchingElement(<Form />)).toBe(true);
   });
 
   // showTodoListMenu
@@ -47,6 +46,13 @@ describe('<TodoList />', () => {
   });
 
   // showEditForm
+  test('Form Component appears when showTodoListMenu fired', () => {
+    const todolist = shallow(<TodoList todo_lists={todo_lists} />);
+    const e = todolist.find('.menu-ellipsis');
+    e.simulate('click', { stopPropagation: () => undefined });
+    todolist.find('.todolist-menu-edit').simulate('click', { stopPropagation: () => undefined });
+    expect(todolist.containsMatchingElement(<Form />)).toBe(true)
+  });
 
   // hideEditForm
 });
