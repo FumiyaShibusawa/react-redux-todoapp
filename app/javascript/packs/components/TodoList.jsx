@@ -105,7 +105,7 @@ class TodoList extends React.Component {
                   {this.state.todolistMenuIndex == i ?
                     <div id={`todolist-menu_${i}`} className="todolist-menu">
                       <ul>
-                        <li onClick={e => {
+                        <li className="todolist-menu-edit" onClick={e => {
                           e.stopPropagation();
                           this.showEditForm(i);
                         }}>edit</li>
