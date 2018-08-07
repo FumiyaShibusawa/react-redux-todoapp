@@ -40,19 +40,30 @@ describe('<TodoList />', () => {
   // showTodoListMenu
   test('todolist-menu appears when showTodoListMenu fired', () => {
     const todolist = shallow(<TodoList todo_lists={todo_lists} />);
-    const e = todolist.find('.menu-ellipsis');
-    e.simulate('click', { stopPropagation: () => undefined });
+    todolist.find('.menu-ellipsis')
+      .simulate('click', { stopPropagation: () => undefined });
     expect(todolist.find('.todolist-menu')).toHaveLength(1);
   });
 
   // showEditForm
   test('Form Component appears when showTodoListMenu fired', () => {
     const todolist = shallow(<TodoList todo_lists={todo_lists} />);
-    const e = todolist.find('.menu-ellipsis');
-    e.simulate('click', { stopPropagation: () => undefined });
-    todolist.find('.todolist-menu-edit').simulate('click', { stopPropagation: () => undefined });
+    todolist.find('.menu-ellipsis')
+      .simulate('click', { stopPropagation: () => undefined });
+    todolist.find('.todolist-menu-edit')
+      .simulate('click', { stopPropagation: () => undefined });
     expect(todolist.containsMatchingElement(<Form />)).toBe(true)
   });
 
-  // hideEditForm
+  // hideEditForm * this test requires Full DOM rendering, mount(...)
+  test('Form Component disappears when hideEditForm fired', () => {
+    const todolist = mount(<TodoList todo_lists={todo_lists} showTodos={() => undefined} />);
+    todolist.find('.menu-ellipsis')
+      .simulate('click', { stopPropagation: () => undefined });
+    todolist.find('.todolist-menu-edit')
+      .simulate('click', { stopPropagation: () => undefined });
+    todolist.find('.cancel')
+      .simulate('click', { stopPropagation: () => undefined });
+    expect(todolist.containsMatchingElement(<Form />)).toBe(false)
+  });
 });
