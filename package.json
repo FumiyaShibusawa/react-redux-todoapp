@@ -24,6 +24,7 @@
     "webpack-dev-server": "2.11.2"
   },
   "scripts": {
-    "test": "NODE_ENV=test jest --env jsdom"
+    "test": "NODE_ENV=test jest --env jsdom",
+    "update-snapshot": "NODE_ENV=test jest --updateSnapshot --env jsdom"
   }
 }
