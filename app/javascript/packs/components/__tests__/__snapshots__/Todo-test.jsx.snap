@@ -1,7 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`it renders correctly 1`] = `
+exports[`<Todo /> it renders correctly 1`] = `
 <div
   className="todo_component"
-/>
+>
+  <div>
+    <h2>
+      write code everyday
+    </h2>
+    <ul
+      className="todos"
+    >
+      <li>
+        <span
+          className="todo-element"
+        >
+          <span
+            className="completed false"
+            onClick={[Function]}
+          />
+          open your editor
+        </span>
+        <span
+          className="menu-ellipsis"
+          onClick={[Function]}
+        >
+          ︙
+        </span>
+      </li>
+    </ul>
+    <div
+      className="add-button"
+    >
+      <div
+        data-add="show-todo"
+      >
+        <div
+          className="plus"
+        >
+          +
+        </div>
+        <span
+          className="add-button-text"
+          onClick={[Function]}
+        >
+          add new todo
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
 `;
