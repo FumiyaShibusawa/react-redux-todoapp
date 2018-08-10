@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Todo from '../Todo';
-import { Form } from '../TodoList';
+import { Form } from '../Todo';
 import renderer from 'react-test-renderer';
 import { shallow, mount, render } from 'enzyme';
 
@@ -36,5 +36,12 @@ describe('<Todo />', () => {
     const todo = mount(<Todo todo_list={todo_lists[0]} num={0} />);
     todo.find('.add-button-text').simulate('click');
     expect(todo.state('isFormToggled')).toBe(true);
+  });
+
+  test('Form Component appears when toggleForm fired', () => {
+    const todo = mount(<Todo todo_list={todo_lists[0]} num={0} />);
+    todo.find('.add-button-text').simulate('click');
+    // console.log(todo.debug())
+    expect(todo.containsMatchingElement(<Form />)).toBe(true);
   });
 });
