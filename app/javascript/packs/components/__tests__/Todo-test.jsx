@@ -41,7 +41,13 @@ describe('<Todo />', () => {
   test('Form Component appears when toggleForm fired', () => {
     const todo = mount(<Todo todo_list={todo_lists[0]} num={0} />);
     todo.find('.add-button-text').simulate('click');
-    // console.log(todo.debug())
     expect(todo.containsMatchingElement(<Form />)).toBe(true);
+  });
+
+  // showTodoMenu
+  test('todo-menu appears when showTodoMenu fired', () => {
+    const todo = mount(<Todo todo_list={todo_lists[0]} num={0} />);
+    todo.find('.menu-ellipsis').simulate('click');
+    expect(todo.find('.todo-menu')).toHaveLength(1);
   });
 });
