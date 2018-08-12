@@ -50,4 +50,27 @@ describe('<Todo />', () => {
     todo.find('.menu-ellipsis').simulate('click');
     expect(todo.find('.todo-menu')).toHaveLength(1);
   });
+
+  // showEditForm
+  test('Form Component appears when showTodoMenu fired', () => {
+    const todo = mount(<Todo todo_list={todo_lists[0]} num={0} />);
+    todo.find('.menu-ellipsis')
+      .simulate('click', { stopPropagation: () => undefined });
+    todo.find('.todo-menu-edit')
+      .simulate('click', { stopPropagation: () => undefined });
+    expect(todo.containsMatchingElement(<Form />)).toBe(true)
+  });
+
+  // hideEditForm
+  test('Form Component disappears when hideEditForm fired', () => {
+    const todo = mount(<Todo todo_list={todo_lists[0]} num={0} />);
+    todo.find('.menu-ellipsis')
+      .simulate('click', { stopPropagation: () => undefined });
+    todo.find('.todo-menu-edit')
+      .simulate('click', { stopPropagation: () => undefined });
+    todo.find('.cancel')
+      .simulate('click', { stopPropagation: () => undefined });
+    expect(todo.containsMatchingElement(<Form />)).toBe(false)
+  });
+
 });
